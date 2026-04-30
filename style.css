@@ -107,8 +107,8 @@ p { margin-bottom: 1rem; color: var(--text-light); }
   border-radius: 999px;
 }
 
-.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; position: fixed; right: 1rem; top: 1.25rem; z-index: 1001; }
-.hamburger span { display: block; width: 24px; height: 2px; background: var(--white); }
+.hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: var(--navy); border: 1px solid var(--gold); cursor: pointer; position: fixed; right: 1rem; top: 1.1rem; z-index: 1001; width: 44px; height: 44px; border-radius: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--white); margin: 0 auto; }
 
 #hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: center; justify-content: center; }
 .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1s ease; }
