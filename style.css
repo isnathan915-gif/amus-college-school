@@ -107,7 +107,7 @@ p { margin-bottom: 1rem; color: var(--text-light); }
   border-radius: 999px;
 }
 
-.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; position: relative; z-index: 1001; }
 .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); }
 
 #hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: center; justify-content: center; }
@@ -262,7 +262,7 @@ body > section:first-of-type:not(#hero), .page-banner { margin-top: var(--header
   .footer-inner { grid-template-columns: 1fr; }
   .form-row, .phone-split { grid-template-columns: 1fr; }
   .checkbox-group { grid-template-columns: repeat(2, 1fr); }
-  #main-nav { position: fixed; top: var(--header-h); left: 0; right: 0; background: var(--navy); padding: 1.5rem; transform: translateY(-110%); transition: transform 0.2s; }
+  #main-nav { position: fixed; top: var(--header-h); left: 0; right: 0; background: var(--navy); padding: 1.5rem; transform: translateY(-110%); transition: transform 0.2s; z-index: 1002; }
   #main-nav.open { transform: translateY(0); }
   #main-nav ul { flex-direction: column; }
   .nav-link { display: block; padding: 0.75rem 0; }
