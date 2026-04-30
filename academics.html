@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- sch: changed site identity to primary school -->
+  <title>Amus College School – Academics</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- sch: removed external Google Fonts link for local-only setup -->
+</head>
+<body data-page-title="Academics">
+
+  <!-- HEADER / NAV: global navigation -->
+  <header id="main-header">
+    <div class="header-inner">
+      <div class="logo-block">
+        <div class="logo-crest"><img src="images/sd_634c3c886d6c9.jpg" alt="Amus College School logo" /></div>
+        <div>
+          <!-- sch: updated brand text -->
+          <span class="logo-name">Amus College School</span>
+          <span class="logo-tag">Let there be light</span>
+        </div>
+      </div>
+      <nav id="main-nav"><!-- Collapses into hamburger menu on small screens -->
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="academics.html" class="nav-link active">Academics</a></li>
+          <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+          <!-- sch: use separate standard contact nav item -->
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- PAGE BANNER: page heading + context -->
+  <!-- sch: switched banner image to local asset -->
+  <section class="page-banner" style="background-image: url('images/sd_63275063d49a7.jpg')">
+    <div class="banner-overlay"></div>
+    <div class="banner-content">
+      <!-- sch: updated banner copy for primary -->
+      <h1>Learning &amp; Programmes</h1>
+      <p>Strong secondary pathways from Senior one to Senior six.</p>
+    </div>
+  </section>
+
+  <!-- TAB SWITCHER: JS shows one tab-content panel at a time -->
+  <section class="section-pad">
+    <div class="container">
+      <span class="section-label">Curriculum</span>
+      <h2>Our Academic Offerings</h2>
+      <div class="tab-bar">
+        <!-- sch: replaced secondary tabs with primary-level tabs -->
+        <button class="tab-btn active-tab" data-tab="olevel">Senior 1-2</button>
+        <button class="tab-btn" data-tab="alevel">Senior 3-4</button>
+        <button class="tab-btn" data-tab="cocurric">Co-Curricular</button>
+      </div>
+
+      <div class="tab-content active-content" id="tab-olevel"><!-- Default tab shown on first load -->
+        <div class="two-col">
+          <div>
+            <!-- sch: lower-primary curriculum copy -->
+            <h3>Senior One to Senior Two</h3>
+            <p>Students build core understanding in key subjects while developing discipline, values, and learning confidence.</p>
+            <h4>Core Learning Areas</h4>
+            <ul class="styled-list">
+              <li>English Language</li>
+              <li>Mathematics</li>
+              <li>Integrated Science</li>
+              <li>Social Studies</li>
+              <li>Religious Education</li>
+              <li>Creative Arts &amp; Physical Education</li>
+            </ul>
+            <h4>Enrichment Areas</h4>
+            <ul class="styled-list">
+              <li>Storytelling &amp; Reading Clubs</li>
+              <li>Music, Dance, and Drama</li>
+              <li>Basic ICT and digital learning</li>
+              <li>Local Language and Culture</li>
+            </ul>
+          </div>
+          <div class="welcome-img-wrap">
+            <!-- sch: switched section image to local asset -->
+            <img src="images/sd_60365fbd788b7.jpg" alt="Classroom" class="welcome-img" />
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-alevel">
+        <div class="two-col">
+          <div>
+            <!-- sch: upper-primary curriculum copy -->
+            <h3>Senior Three to Senior Four</h3>
+            <p>Learners deepen understanding and prepare for UCE with structured coursework and continuous assessment.</p>
+            <div class="program-cards" style="margin-top:1.5rem">
+              <article class="program-card">
+                <div class="card-icon">🔬</div>
+                <h3>Core Academics</h3>
+                <ul class="styled-list">
+                  <li>English Language</li>
+                  <li>Mathematics</li>
+                  <li>Integrated Science</li>
+                </ul>
+              </article>
+              <article class="program-card featured-card">
+                <div class="card-icon">📖</div>
+                <h3>Humanities</h3>
+                <ul class="styled-list">
+                  <li>Social Studies</li>
+                  <li>Religious Education</li>
+                  <li>Reading Comprehension</li>
+                </ul>
+              </article>
+              <article class="program-card">
+                <div class="card-icon">💼</div>
+                <h3>Senior Five to Senior Six</h3>
+                <ul class="styled-list">
+                  <li>Advanced Subject Focus</li>
+                  <li>Talent and Leadership</li>
+                  <li>University and Career Readiness</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-cocurric">
+        <h3>Co-Curricular Activities</h3>
+        <!-- sch: pupil wording -->
+        <p>We believe education extends beyond the classroom. Every pupil is encouraged to participate in at least one co-curricular activity.</p>
+        <div class="values-grid" style="margin-top:2rem">
+          <div class="value-card"><div class="val-icon">⚽</div><h4>Sports</h4><p>Football, netball, basketball, volleyball, athletics, and swimming.</p></div>
+          <div class="value-card"><div class="val-icon">🎭</div><h4>Drama &amp; Arts</h4><p>Annual drama festival, fine art exhibitions, and creative writing competitions.</p></div>
+          <div class="value-card"><div class="val-icon">🗣️</div><h4>Debate Club</h4><p>Inter-school and national-level debates — developing critical thinking and public speaking.</p></div>
+          <div class="value-card"><div class="val-icon">🎵</div><h4>Music &amp; Choir</h4><p>School choir, band, and traditional music ensemble perform at national events.</p></div>
+          <div class="value-card"><div class="val-icon">💻</div><h4>ICT Club</h4><p>Coding, robotics, and digital design workshops led by industry mentors.</p></div>
+          <div class="value-card"><div class="val-icon">🌱</div><h4>Environment Club</h4><p>Tree planting, recycling drives, and sustainability education projects.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AMUS HIGHLIGHTS: replaces timetable with Amus-specific information -->
+  <section class="section-pad bg-light">
+    <div class="container">
+      <span class="section-label">Highlights</span>
+      <h2>Location, Goals &amp; Admissions</h2>
+      <div class="values-grid" style="margin-top:2rem">
+        <div class="value-card">
+          <div class="val-icon">📍</div>
+          <h4>Location</h4>
+          <p>Amus College School is located in Bukedea District, Eastern Uganda. One kilometer off Mbale-Soroti highway on Amus Sapir Hill.</p>
+        </div>
+        <div class="value-card">
+          <div class="val-icon">🎯</div>
+          <h4>Goals</h4>
+          <p>The college is a universal institution interested in providing a bright future in both education and talent of the community.</p>
+        </div>
+        <div class="value-card">
+          <div class="val-icon">📞</div>
+          <h4>Admissions</h4>
+          <p>Admission for all classes from Senior one to Senior six is ongoing. Please call now for more information. P.O. Box number 2058.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER: shared footer component -->
+  <footer id="main-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <!-- sch: footer branding updated -->
+        <div class="footer-logo">✦ Amus College School</div>
+        <p>Let there be light<br />Bukedea District, Eastern Uganda</p>
+      </div>
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="academics.html">Academics</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <!-- sch: contact email updated -->
+        <address>P.O. Box 2058<br />📞 +256 414 000 000<br />✉ info@amuscollegeschool.ac.ug</address>
+      </div>
+      <div class="footer-col">
+        <h5>Follow Us</h5>
+        <div class="social-links">
+          <a href="#" class="social-btn">Facebook</a>
+          <a href="#" class="social-btn">Twitter</a>
+          <a href="#" class="social-btn">YouTube</a>
+        </div>
+      </div>
+    </div>
+    <!-- sch: copyright name updated -->
+    <div class="footer-bottom"><p>&copy; 2026 Amus College School. All rights reserved.</p></div>
+  </footer>
+
+  <!-- sch: floating enrol CTA separate from navbar -->
+  <a href="contact.html#registration" class="floating-enrol-btn">Enrol Now</a>
+
+  <script src="main.js"></script>
+</body>
+</html>
+
