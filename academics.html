@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome 6 (free icons) -->
+  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
   <style>
@@ -17,19 +17,51 @@
 
     /* FIX 1: Mobile nav. */
     @media (max-width: 768px) {
+      /* Override broken global styles */
+      #main-header {
+        display: flex !important;
+        height: var(--header-h) !important;
+        background: var(--navy) !important;
+        backdrop-filter: none !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+      }
+      .mobile-top-bar {
+        display: none !important;  /* remove non-existent element */
+      }
       #main-nav {
         position: fixed;
-        top: 0; left: 0; right: 0;
+        top: var(--header-h);
+        left: 0;
+        right: 0;
         background: var(--navy);
-        padding: 4rem 1.5rem 1.5rem;
-        transform: translateY(-110%);
-        transition: transform 0.25s ease;
-        z-index: 9998;
-        border-bottom: 1px solid rgba(201,149,42,0.25);
+        padding: 1rem 1.5rem;
+        transform: translateY(-200%);
+        transition: transform 0.3s ease;
+        z-index: 999;
       }
-      #main-nav.open { transform: translateY(0); }
-      #main-nav ul   { flex-direction: column; }
-      .nav-link      { display: block; padding: 0.85rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+      #main-nav.open {
+        transform: translateY(0);
+        display: block !important;
+      }
+      #main-nav ul {
+        flex-direction: column;
+        gap: 0;
+      }
+      .nav-link {
+        display: block;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+      }
+      .hamburger {
+        display: flex !important;
+        position: relative;
+        right: auto;
+        top: auto;
+      }
     }
 
     /* FIX 2: value-card contrast on light backgrounds. */
@@ -41,7 +73,7 @@
     .section-light .value-card h4 { color: var(--navy); }
     .section-light .value-card p  { color: var(--text-light); }
 
-    /* FIX 3: program-cards on light background – ALL CARDS WHITE, no navy, no yellow border */
+    /* FIX 3: program-cards on light background – ALL CARDS WHITE */
     .program-card {
       background: var(--white);
       border: 1px solid var(--border);
@@ -49,7 +81,6 @@
     }
     .program-card h3 { color: var(--navy); }
     
-    /* Featured cards: identical to regular cards */
     .featured-card {
       background: var(--white) !important;
       border: 1px solid var(--border) !important;
@@ -62,12 +93,11 @@
     .featured-card .styled-list li {
       color: var(--text-light) !important;
     }
-    /* Icons in featured cards also gold */
     .featured-card .card-icon {
       color: var(--gold) !important;
     }
 
-    /* Highlights section: light background */
+    /* Highlights section */
     .highlights-section                { background: var(--light-bg); }
     .highlights-section h2             { color: var(--navy); }
     .highlights-section .section-label { color: var(--gold); }
@@ -76,13 +106,11 @@
     .banner-content p { color: rgba(255,255,255,0.75); margin-top: 0.4rem; font-size: 1.05rem; }
     .welcome-img      { border-radius: 12px; box-shadow: 0 16px 48px rgba(13,27,42,0.18); }
     
-    /* GIVE ALL ICONS THE GOLD COLOR */
     .card-icon, .val-icon {
       font-size: 2rem;
       margin-bottom: 0.75rem;
       color: var(--gold) !important;
     }
-    /* Ensure the icons inside keep gold */
     .card-icon i, .val-icon i {
       color: var(--gold);
     }
@@ -172,7 +200,7 @@
         <button class="tab-btn"            data-tab="cocurric" role="tab" aria-selected="false" aria-controls="tab-cocurric">Co-Curricular</button>
       </div>
 
-      <!-- TAB: Senior 1-2 (icons with Font Awesome, all gold) -->
+      <!-- TAB: Senior 1-2 -->
       <div class="tab-content active-content" id="tab-olevel" role="tabpanel">
         <h3>Senior One to Senior Two</h3>
         <p>Students build core understanding in key subjects while developing discipline, values, and learning confidence.</p>
@@ -217,7 +245,7 @@
         </div>
       </div>
 
-      <!-- TAB: Senior 3-4 (all white cards, gold icons) -->
+      <!-- TAB: Senior 3-4 -->
       <div class="tab-content" id="tab-alevel" role="tabpanel">
         <h3>Senior Three to Senior Four</h3>
         <p>Learners deepen understanding and prepare for UCE with structured coursework and continuous assessment.</p>
@@ -252,7 +280,7 @@
         </div>
       </div>
 
-      <!-- TAB: Senior 5-6 (gold icons) -->
+      <!-- TAB: Senior 5-6 -->
       <div class="tab-content" id="tab-slevel" role="tabpanel">
         <h3>Senior Five to Senior Six</h3>
         <p>Advanced level studies preparing students for university entry and career readiness through focused subject combinations and leadership development.</p>
@@ -287,7 +315,7 @@
         </div>
       </div>
 
-      <!-- TAB: Co-Curricular (value-cards with gold icons) -->
+      <!-- TAB: Co-Curricular -->
       <div class="tab-content" id="tab-cocurric" role="tabpanel">
         <h3>Co-Curricular Activities</h3>
         <p>We believe education extends beyond the classroom. Every pupil is encouraged to participate in at least one co-curricular activity.</p>
@@ -304,7 +332,7 @@
     </div>
   </section>
 
-  <!-- HIGHLIGHTS — light background, cards white, gold icons -->
+  <!-- HIGHLIGHTS SECTION -->
   <section class="section-pad highlights-section">
     <div class="container">
       <span class="section-label">Highlights</span>
@@ -329,7 +357,7 @@
     </div>
   </section>
 
-  <!-- FOOTER (balanced with icons) -->
+  <!-- FOOTER -->
   <footer id="main-footer">
     <div class="footer-inner">
       <div class="footer-col">
@@ -426,7 +454,7 @@
         });
       }
 
-      // Scroll reveal (only for cards)
+      // Scroll reveal
       const revealEls = document.querySelectorAll('.program-card, .value-card');
       if ('IntersectionObserver' in window && revealEls.length) {
         const obs = new IntersectionObserver(entries => {

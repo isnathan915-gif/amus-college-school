@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amus College School – Contact &amp; Registration</title>
-  <!-- Google Fonts (matching main site) -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome 6 (free icons) -->
+  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
   <style>
@@ -135,6 +135,54 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* ========== MOBILE HEADER FIX (override global) ========== */
+    @media (max-width: 768px) {
+      #main-header {
+        display: flex !important;
+        height: var(--header-h) !important;
+        background: var(--navy) !important;
+        backdrop-filter: none !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+      }
+      .mobile-top-bar {
+        display: none !important;
+      }
+      #main-nav {
+        position: fixed;
+        top: var(--header-h);
+        left: 0;
+        right: 0;
+        background: var(--navy);
+        padding: 1rem 1.5rem;
+        transform: translateY(-200%);
+        transition: transform 0.3s ease;
+        z-index: 999;
+      }
+      #main-nav.open {
+        transform: translateY(0);
+        display: block !important;
+      }
+      #main-nav ul {
+        flex-direction: column;
+        gap: 0;
+      }
+      .nav-link {
+        display: block;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+      }
+      .hamburger {
+        display: flex !important;
+        position: relative;
+        right: auto;
+        top: auto;
+      }
+    }
   </style>
 </head>
 <body data-page-title="Contact & Admissions">
@@ -173,7 +221,7 @@
     </div>
   </section>
 
-  <!-- CONTACT INFO + MAP (two-column layout with FA icons) -->
+  <!-- CONTACT INFO -->
   <section class="section-pad">
     <div class="container two-col">
       <div>
@@ -211,7 +259,8 @@
         </ul>
       </div>
       <div>
-       
+        <!-- Map placeholder removed as requested -->
+      </div>
     </div>
   </section>
 
@@ -399,7 +448,7 @@
     </div>
   </section>
 
-  <!-- FOOTER (balanced with icons) -->
+  <!-- FOOTER -->
   <footer id="main-footer">
     <div class="footer-inner">
       <div class="footer-col">
@@ -439,6 +488,113 @@
   <!-- FLOATING CTA -->
   <a href="contact.html#registration" class="floating-enrol-btn">Enrol Now</a>
 
-  <script src="main.js"></script>
+  <script>
+    (function() {
+      // Brand injection
+      const brand = { name: 'Amus College School', tagline: 'Let there be light' };
+      document.querySelectorAll('.logo-name').forEach(el => el.textContent = brand.name);
+      document.querySelectorAll('.logo-tag').forEach(el => el.textContent = brand.tagline);
+      const footerLogo = document.querySelector('.footer-logo');
+      if (footerLogo) footerLogo.innerHTML = `✦ ${brand.name}`;
+      
+      // Page title
+      const pageTitle = document.body.getAttribute('data-page-title');
+      if (pageTitle) document.title = `${brand.name} – ${pageTitle}`;
+
+      // Header scroll shadow
+      const header = document.getElementById('main-header');
+      if (header) {
+        window.addEventListener('scroll', () => {
+          header.style.boxShadow = window.scrollY > 30 ? '0 4px 24px rgba(0,0,0,0.4)' : '';
+        });
+      }
+
+      // Hamburger menu
+      const hamburger = document.getElementById('hamburger');
+      const mainNav = document.getElementById('main-nav');
+      if (hamburger && mainNav) {
+        hamburger.addEventListener('click', () => {
+          const isOpen = mainNav.classList.toggle('open');
+          hamburger.setAttribute('aria-expanded', isOpen);
+          const spans = hamburger.querySelectorAll('span');
+          if (isOpen) {
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+          } else {
+            spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+          }
+        });
+        mainNav.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', () => {
+            mainNav.classList.remove('open');
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+          });
+        });
+      }
+
+      // Form validation and submission (stub for demo)
+      const regForm = document.getElementById('registration-form');
+      const contactForm = document.getElementById('contact-form');
+      const formSuccess = document.getElementById('form-success');
+      const contactSuccess = document.getElementById('contact-success');
+      const resetBtn = document.getElementById('form-reset-btn');
+
+      if (regForm) {
+        regForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          // Basic validation simulation
+          let isValid = true;
+          const required = ['first-name', 'last-name', 'dob', 'gender', 'grade', 'parent-name', 'relationship', 'phone-number', 'email', 'agree'];
+          required.forEach(id => {
+            const field = document.getElementById(id);
+            if (field && !field.value) {
+              isValid = false;
+              const errSpan = document.getElementById(`err-${id}`);
+              if (errSpan) errSpan.textContent = 'This field is required';
+            } else {
+              const errSpan = document.getElementById(`err-${id}`);
+              if (errSpan) errSpan.textContent = '';
+            }
+          });
+          if (isValid) {
+            regForm.classList.add('hidden');
+            formSuccess.classList.remove('hidden');
+          }
+        });
+        if (resetBtn) {
+          resetBtn.addEventListener('click', () => {
+            regForm.classList.remove('hidden');
+            formSuccess.classList.add('hidden');
+            regForm.reset();
+          });
+        }
+      }
+
+      if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          let isValid = true;
+          ['c-name', 'c-email', 'c-subject', 'c-message'].forEach(id => {
+            const field = document.getElementById(id);
+            if (field && !field.value) {
+              isValid = false;
+              const errSpan = document.getElementById(`err-${id}`);
+              if (errSpan) errSpan.textContent = 'This field is required';
+            } else {
+              const errSpan = document.getElementById(`err-${id}`);
+              if (errSpan) errSpan.textContent = '';
+            }
+          });
+          if (isValid) {
+            contactForm.reset();
+            contactSuccess.classList.remove('hidden');
+            setTimeout(() => contactSuccess.classList.add('hidden'), 5000);
+          }
+        });
+      }
+    })();
+  </script>
 </body>
 </html>

@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amus College School – Gallery</title>
-  <!-- Google Fonts (matching main site) -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome 6 (free icons) -->
+  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
   <style>
@@ -28,7 +28,7 @@
       text-transform: uppercase;
       opacity: 0.9;
     }
-    /* Gallery filter bar and items styling (ensure gold accents) */
+    /* Gallery filter bar and items styling */
     .filter-bar {
       display: flex;
       gap: 0.5rem;
@@ -170,6 +170,54 @@
     .banner-content h1, .banner-content p {
       color: #ffffff;
     }
+
+    /* ========== MOBILE HEADER FIX (override global) ========== */
+    @media (max-width: 768px) {
+      #main-header {
+        display: flex !important;
+        height: var(--header-h) !important;
+        background: var(--navy) !important;
+        backdrop-filter: none !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+      }
+      .mobile-top-bar {
+        display: none !important;
+      }
+      #main-nav {
+        position: fixed;
+        top: var(--header-h);
+        left: 0;
+        right: 0;
+        background: var(--navy);
+        padding: 1rem 1.5rem;
+        transform: translateY(-200%);
+        transition: transform 0.3s ease;
+        z-index: 999;
+      }
+      #main-nav.open {
+        transform: translateY(0);
+        display: block !important;
+      }
+      #main-nav ul {
+        flex-direction: column;
+        gap: 0;
+      }
+      .nav-link {
+        display: block;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+      }
+      .hamburger {
+        display: flex !important;
+        position: relative;
+        right: auto;
+        top: auto;
+      }
+    }
   </style>
 </head>
 <body data-page-title="Gallery">
@@ -269,7 +317,7 @@
     <button class="lightbox-next" id="lightbox-next"><i class="fas fa-chevron-right"></i></button>
   </div>
 
-  <!-- FOOTER (consistent with other pages) -->
+  <!-- FOOTER -->
   <footer id="main-footer">
     <div class="footer-inner">
       <div class="footer-col">
@@ -311,7 +359,7 @@
 
   <script>
     (function() {
-      // Brand injection for logo and footer
+      // Brand injection
       const brand = { name: 'Amus College School', tagline: 'Let there be light' };
       document.querySelectorAll('.logo-name').forEach(el => el.textContent = brand.name);
       document.querySelectorAll('.logo-tag').forEach(el => el.textContent = brand.tagline);
@@ -355,7 +403,7 @@
         });
       }
 
-      // Gallery filter functionality
+      // Gallery filter
       const filterBtns = document.querySelectorAll('.filter-btn');
       const galleryItems = document.querySelectorAll('.gallery-item');
       
@@ -429,7 +477,6 @@
         lightboxCaption.textContent = captionSpan ? captionSpan.textContent : '';
       }
 
-      // Attach click event to each gallery item
       galleryItems.forEach((item, idx) => {
         item.addEventListener('click', () => {
           updateVisibleImages();
@@ -442,7 +489,6 @@
       if (prevBtn) prevBtn.addEventListener('click', showPrevImage);
       if (nextBtn) nextBtn.addEventListener('click', showNextImage);
       
-      // Keyboard navigation
       document.addEventListener('keydown', (e) => {
         if (!lightbox.classList.contains('hidden')) {
           if (e.key === 'Escape') closeLightbox();
