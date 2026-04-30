@@ -3,14 +3,178 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- sch: changed site identity to primary school -->
-  <title>Amus College School</title>
+  <title>Amus College School – Gallery</title>
+  <!-- Google Fonts (matching main site) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
-  <!-- sch: removed external Google Fonts link for local-only setup -->
+  <style>
+    /* Additional consistency fixes */
+    .logo-block > div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.2;
+    }
+    .logo-name {
+      margin-bottom: 0.1rem;
+    }
+    .logo-tag {
+      font-size: 0.65rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+    /* Gallery filter bar and items styling (ensure gold accents) */
+    .filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 0.5rem 1.25rem;
+      border: 2px solid var(--border);
+      background: transparent;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-btn.active-filter,
+    .filter-btn:hover {
+      background: var(--navy);
+      color: var(--gold);
+      border-color: var(--navy);
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      aspect-ratio: 1 / 1;
+      cursor: pointer;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13,27,42,0.85) 0%, transparent 60%);
+      opacity: 0;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+      transition: opacity 0.2s;
+    }
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+    .gallery-overlay span {
+      color: var(--white);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .gallery-item.hidden {
+      display: none;
+    }
+    /* Lightbox styling */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: rgba(0,0,0,0.9);
+    }
+    .lightbox.hidden {
+      display: none;
+    }
+    .lightbox-img-wrap {
+      text-align: center;
+      max-width: 80vw;
+    }
+    .lightbox-img-wrap img {
+      max-height: 80vh;
+      border-radius: 8px;
+    }
+    #lightbox-caption {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+      margin-top: 0.75rem;
+    }
+    .lightbox-close, .lightbox-prev, .lightbox-next {
+      background: none;
+      border: 2px solid rgba(255,255,255,0.5);
+      color: var(--white);
+      cursor: pointer;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 1.2rem;
+      transition: all 0.2s;
+    }
+    .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--navy);
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+    }
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .filter-bar {
+        justify-content: center;
+      }
+    }
+    @media (max-width: 480px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    /* Ensure footer social buttons have icons */
+    .social-btn i {
+      margin-right: 0.4rem;
+    }
+    /* Banner text white */
+    .banner-content h1, .banner-content p {
+      color: #ffffff;
+    }
+  </style>
 </head>
 <body data-page-title="Gallery">
 
-  <!-- HEADER / NAV: global site navigation -->
+  <!-- HEADER / NAV -->
   <header id="main-header">
     <div class="header-inner">
       <div class="logo-block">
@@ -22,36 +186,29 @@
       </div>
       <nav id="main-nav">
         <ul>
-      <li><a href="index.html" class="nav-link">Home</a></li>
-      <li><a href="about.html" class="nav-link">About</a></li>
-      <li><a href="academics.html" class="nav-link">Academics</a></li>
-      <li><a href="gallery.html" class="nav-link active">Gallery</a></li>
-      <li><a href="contact.html" class="nav-link">Contact</a></li>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="academics.html" class="nav-link">Academics</a></li>
+          <li><a href="gallery.html" class="nav-link active">Gallery</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
         </ul>
       </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
-  <div class="mobile-top-bar">
-    <div class="mobile-logo">
-      <img src="images/sd_634c3c886d6c9.jpg" alt="Amus College School" />
-      <span>Amus College School</span>
-    </div>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-  <!-- PAGE BANNER: gallery intro -->
-  <!-- sch: switched banner image to local asset -->
+
+  <!-- PAGE BANNER -->
   <section class="page-banner" style="background-image: url('images/sd_63274e34be51c.jpg')">
     <div class="banner-overlay"></div>
     <div class="banner-content">
       <h1>School Gallery</h1>
-      <!-- sch: banner copy adjusted -->
-      <p></p>
+      <p>Moments that capture the spirit of Amus College School</p>
     </div>
   </section>
 
-  <!-- FILTER BUTTONS: JS filters cards by matching data-category -->
+  <!-- GALLERY SECTION -->
   <section class="section-pad">
     <div class="container">
       <span class="section-label">Gallery</span>
@@ -78,8 +235,8 @@
           <div class="gallery-overlay"><span>School Bus</span></div>
         </div>
         <div class="gallery-item" data-category="events">
-          <img src="images/sd_632751fad02e7.jpg" alt="School bus with distinctive blue interior" loading="lazy" />
-          <div class="gallery-overlay"><span>Bus Interior</span></div>
+          <img src="images/sd_632751fad02e7.jpg" alt="School hall with distinctive blue interior walls" loading="lazy" />
+          <div class="gallery-overlay"><span>Blue Interior Hall</span></div>
         </div>
         <div class="gallery-item" data-category="academics">
           <img src="images/sd_63275063d49a7.jpg" alt="Secondary school block and classrooms" loading="lazy" />
@@ -90,8 +247,8 @@
           <div class="gallery-overlay"><span>Bus Interior</span></div>
         </div>
         <div class="gallery-item" data-category="events">
-          <img src="images/sd_634eacb1651f1.jpg" alt="CAF 2024 event at school" loading="lazy" />
-          <div class="gallery-overlay"><span>CAF 2024</span></div>
+          <img src="images/sd_634eacb1651f1.jpg" alt="CAF 2024 celebration event at school" loading="lazy" />
+          <div class="gallery-overlay"><span>CAF 2024 Celebration</span></div>
         </div>
         <div class="gallery-item" data-category="campus">
           <img src="images/sd_63274e34be51c.jpg" alt="School building closeup view" loading="lazy" />
@@ -101,25 +258,23 @@
     </div>
   </section>
 
-  <!-- LIGHTBOX: modal image viewer with next/prev + keyboard support -->
+  <!-- LIGHTBOX -->
   <div id="lightbox" class="lightbox hidden">
-    <button class="lightbox-close" id="lightbox-close">&times;</button>
-    <button class="lightbox-prev" id="lightbox-prev">&#8592;</button>
+    <button class="lightbox-close" id="lightbox-close"><i class="fas fa-times"></i></button>
+    <button class="lightbox-prev" id="lightbox-prev"><i class="fas fa-chevron-left"></i></button>
     <div class="lightbox-img-wrap">
       <img id="lightbox-img" src="" alt="Gallery image" />
       <p id="lightbox-caption"></p>
     </div>
-    <button class="lightbox-next" id="lightbox-next">&#8594;</button>
+    <button class="lightbox-next" id="lightbox-next"><i class="fas fa-chevron-right"></i></button>
   </div>
-  <div id="lightbox-backdrop" class="lightbox-backdrop hidden"></div>
 
-  <!-- FOOTER: shared footer -->
+  <!-- FOOTER (consistent with other pages) -->
   <footer id="main-footer">
     <div class="footer-inner">
       <div class="footer-col">
-        <!-- sch: footer branding updated -->
         <div class="footer-logo">✦ Amus College School</div>
-      <p><br /></p>
+        <p>Let there be light<br />Bukedea District, Eastern Uganda</p>
       </div>
       <div class="footer-col">
         <h5>Quick Links</h5>
@@ -132,27 +287,170 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h5></h5>
-        <!-- sch: contact email updated -->
-        <address><br /><br /></address>
+        <h5>Contact</h5>
+        <address>
+          P.O. Box 2058<br />
+          <i class="fas fa-phone-alt"></i> +256 414 000 000<br />
+          <i class="fas fa-envelope"></i> info@amuscollegeschool.ac.ug
+        </address>
       </div>
       <div class="footer-col">
         <h5>Follow Us</h5>
         <div class="social-links">
-          <a href="#" class="social-btn">Facebook</a>
-          <a href="#" class="social-btn">Twitter</a>
-          <a href="#" class="social-btn">YouTube</a>
+          <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="#" class="social-btn"><i class="fab fa-twitter"></i> Twitter</a>
+          <a href="#" class="social-btn"><i class="fab fa-youtube"></i> YouTube</a>
         </div>
       </div>
     </div>
-    <!-- sch: copyright name updated -->
-    <div class="footer-bottom"><p>&copy; 2026 Amus College School.</p></div>
+    <div class="footer-bottom"><p>&copy; 2026 Amus College School. All rights reserved.</p></div>
   </footer>
 
-  <!-- sch: floating enrol CTA separate from navbar -->
+  <!-- FLOATING CTA -->
   <a href="contact.html#registration" class="floating-enrol-btn">Enrol Now</a>
 
-  <script src="main.js"></script>
+  <script>
+    (function() {
+      // Brand injection for logo and footer
+      const brand = { name: 'Amus College School', tagline: 'Let there be light' };
+      document.querySelectorAll('.logo-name').forEach(el => el.textContent = brand.name);
+      document.querySelectorAll('.logo-tag').forEach(el => el.textContent = brand.tagline);
+      const footerLogo = document.querySelector('.footer-logo');
+      if (footerLogo) footerLogo.innerHTML = `✦ ${brand.name}`;
+      
+      // Page title
+      const pageTitle = document.body.getAttribute('data-page-title');
+      if (pageTitle) document.title = `${brand.name} – ${pageTitle}`;
+
+      // Header scroll shadow
+      const header = document.getElementById('main-header');
+      if (header) {
+        window.addEventListener('scroll', () => {
+          header.style.boxShadow = window.scrollY > 30 ? '0 4px 24px rgba(0,0,0,0.4)' : '';
+        });
+      }
+
+      // Hamburger menu
+      const hamburger = document.getElementById('hamburger');
+      const mainNav = document.getElementById('main-nav');
+      if (hamburger && mainNav) {
+        hamburger.addEventListener('click', () => {
+          const isOpen = mainNav.classList.toggle('open');
+          hamburger.setAttribute('aria-expanded', isOpen);
+          const spans = hamburger.querySelectorAll('span');
+          if (isOpen) {
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+          } else {
+            spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+          }
+        });
+        mainNav.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', () => {
+            mainNav.classList.remove('open');
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+          });
+        });
+      }
+
+      // Gallery filter functionality
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      
+      if (filterBtns.length) {
+        filterBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const filterValue = btn.getAttribute('data-filter');
+            filterBtns.forEach(b => b.classList.remove('active-filter'));
+            btn.classList.add('active-filter');
+            
+            galleryItems.forEach(item => {
+              if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                item.classList.remove('hidden');
+              } else {
+                item.classList.add('hidden');
+              }
+            });
+          });
+        });
+      }
+
+      // Lightbox functionality
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+      const closeBtn = document.getElementById('lightbox-close');
+      const prevBtn = document.getElementById('lightbox-prev');
+      const nextBtn = document.getElementById('lightbox-next');
+      let currentImageIndex = 0;
+      let visibleImages = [];
+
+      function updateVisibleImages() {
+        visibleImages = Array.from(document.querySelectorAll('.gallery-item:not(.hidden)'));
+      }
+
+      function openLightbox(index) {
+        updateVisibleImages();
+        if (visibleImages.length === 0) return;
+        currentImageIndex = index;
+        const imgElement = visibleImages[currentImageIndex].querySelector('img');
+        const captionSpan = visibleImages[currentImageIndex].querySelector('.gallery-overlay span');
+        lightboxImg.src = imgElement.src;
+        lightboxImg.alt = imgElement.alt;
+        lightboxCaption.textContent = captionSpan ? captionSpan.textContent : '';
+        lightbox.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      function showPrevImage() {
+        if (visibleImages.length === 0) return;
+        currentImageIndex = (currentImageIndex - 1 + visibleImages.length) % visibleImages.length;
+        const imgElement = visibleImages[currentImageIndex].querySelector('img');
+        const captionSpan = visibleImages[currentImageIndex].querySelector('.gallery-overlay span');
+        lightboxImg.src = imgElement.src;
+        lightboxImg.alt = imgElement.alt;
+        lightboxCaption.textContent = captionSpan ? captionSpan.textContent : '';
+      }
+
+      function showNextImage() {
+        if (visibleImages.length === 0) return;
+        currentImageIndex = (currentImageIndex + 1) % visibleImages.length;
+        const imgElement = visibleImages[currentImageIndex].querySelector('img');
+        const captionSpan = visibleImages[currentImageIndex].querySelector('.gallery-overlay span');
+        lightboxImg.src = imgElement.src;
+        lightboxImg.alt = imgElement.alt;
+        lightboxCaption.textContent = captionSpan ? captionSpan.textContent : '';
+      }
+
+      // Attach click event to each gallery item
+      galleryItems.forEach((item, idx) => {
+        item.addEventListener('click', () => {
+          updateVisibleImages();
+          const newIndex = visibleImages.findIndex(visible => visible === item);
+          if (newIndex !== -1) openLightbox(newIndex);
+        });
+      });
+
+      if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+      if (prevBtn) prevBtn.addEventListener('click', showPrevImage);
+      if (nextBtn) nextBtn.addEventListener('click', showNextImage);
+      
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('hidden')) {
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowLeft') showPrevImage();
+          if (e.key === 'ArrowRight') showNextImage();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
-

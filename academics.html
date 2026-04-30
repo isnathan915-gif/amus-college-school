@@ -3,73 +3,184 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- sch: changed site identity to primary school -->
   <title>Amus College School – Academics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
-  <!-- sch: removed external Google Fonts link for local-only setup -->
+  <style>
+    /*
+     * Page-specific fixes — do not edit style.css for these.
+     */
+
+    /* FIX 1: Mobile nav. */
+    @media (max-width: 768px) {
+      #main-nav {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        background: var(--navy);
+        padding: 4rem 1.5rem 1.5rem;
+        transform: translateY(-110%);
+        transition: transform 0.25s ease;
+        z-index: 9998;
+        border-bottom: 1px solid rgba(201,149,42,0.25);
+      }
+      #main-nav.open { transform: translateY(0); }
+      #main-nav ul   { flex-direction: column; }
+      .nav-link      { display: block; padding: 0.85rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    }
+
+    /* FIX 2: value-card contrast on light backgrounds. */
+    .section-light .value-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .section-light .value-card h4 { color: var(--navy); }
+    .section-light .value-card p  { color: var(--text-light); }
+
+    /* FIX 3: program-cards on light background – ALL CARDS WHITE, no navy, no yellow border */
+    .program-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .program-card h3 { color: var(--navy); }
+    
+    /* Featured cards: identical to regular cards */
+    .featured-card {
+      background: var(--white) !important;
+      border: 1px solid var(--border) !important;
+      color: var(--text) !important;
+      box-shadow: none;
+    }
+    .featured-card h3 {
+      color: var(--navy) !important;
+    }
+    .featured-card .styled-list li {
+      color: var(--text-light) !important;
+    }
+    /* Icons in featured cards also gold */
+    .featured-card .card-icon {
+      color: var(--gold) !important;
+    }
+
+    /* Highlights section: light background */
+    .highlights-section                { background: var(--light-bg); }
+    .highlights-section h2             { color: var(--navy); }
+    .highlights-section .section-label { color: var(--gold); }
+
+    /* Misc tweaks */
+    .banner-content p { color: rgba(255,255,255,0.75); margin-top: 0.4rem; font-size: 1.05rem; }
+    .welcome-img      { border-radius: 12px; box-shadow: 0 16px 48px rgba(13,27,42,0.18); }
+    
+    /* GIVE ALL ICONS THE GOLD COLOR */
+    .card-icon, .val-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+      color: var(--gold) !important;
+    }
+    /* Ensure the icons inside keep gold */
+    .card-icon i, .val-icon i {
+      color: var(--gold);
+    }
+
+    h4.subheading     { color: var(--navy); margin-top: 1.25rem; margin-bottom: 0.25rem; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* Stack logo tagline below school name */
+    .logo-block > div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.2;
+    }
+    .logo-name {
+      margin-bottom: 0.1rem;
+    }
+    .logo-tag {
+      font-size: 0.7rem;
+      opacity: 0.9;
+    }
+
+    /* Consistency for Senior 1-2 tab: image below cards */
+    .image-below-cards {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .image-below-cards img {
+      max-width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+    }
+    @media (max-width: 768px) {
+      .image-below-cards {
+        margin-top: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body data-page-title="Academics">
 
-  <!-- HEADER / NAV: global navigation -->
+  <!-- HEADER / NAV -->
   <header id="main-header">
     <div class="header-inner">
       <div class="logo-block">
-        <div class="logo-crest"><img src="images/sd_634c3c886d6c9.jpg" alt="Amus College School logo" /></div>
+        <div class="logo-crest">
+          <img src="images/sd_634c3c886d6c9.jpg" alt="Amus College School logo" />
+        </div>
         <div>
           <span class="logo-name">Amus College School</span>
           <span class="logo-tag">Let there be light</span>
         </div>
       </div>
-      <nav id="main-nav">
+      <nav id="main-nav" aria-label="Main navigation">
         <ul>
-      <li><a href="index.html" class="nav-link">Home</a></li>
-      <li><a href="about.html" class="nav-link">About</a></li>
-      <li><a href="academics.html" class="nav-link active">Academics</a></li>
-      <li><a href="gallery.html" class="nav-link">Gallery</a></li>
-      <li><a href="contact.html" class="nav-link">Contact</a></li>
+          <li><a href="index.html"     class="nav-link">Home</a></li>
+          <li><a href="about.html"     class="nav-link">About</a></li>
+          <li><a href="academics.html" class="nav-link active" aria-current="page">Academics</a></li>
+          <li><a href="gallery.html"   class="nav-link">Gallery</a></li>
+          <li><a href="contact.html"   class="nav-link">Contact</a></li>
         </ul>
       </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
-  <div class="mobile-top-bar">
-    <div class="mobile-logo">
-      <img src="images/sd_634c3c886d6c9.jpg" alt="Amus College School" />
-      <span>Amus College School</span>
-    </div>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-  <!-- PAGE BANNER: page heading + context -->
-  <!-- sch: switched banner image to local asset -->
+
+  <!-- PAGE BANNER -->
   <section class="page-banner" style="background-image: url('images/sd_63275063d49a7.jpg')">
     <div class="banner-overlay"></div>
     <div class="banner-content">
-      <!-- sch: updated banner copy for primary -->
       <h1>Learning &amp; Programmes</h1>
-      <p>Strong secondary pathways from Senior one to Senior six.</p>
+      <p>Strong secondary pathways from Senior One to Senior Six.</p>
     </div>
   </section>
 
-  <!-- TAB SWITCHER: JS shows one tab-content panel at a time -->
+  <!-- CURRICULUM TABS -->
   <section class="section-pad">
     <div class="container">
       <span class="section-label">Curriculum</span>
       <h2>Our Academic Offerings</h2>
-      <div class="tab-bar">
-        <!-- sch: replaced secondary tabs with primary-level tabs -->
-        <button class="tab-btn active-tab" data-tab="olevel">Senior 1-2</button>
-        <button class="tab-btn" data-tab="alevel">Senior 3-4</button>
-        <button class="tab-btn" data-tab="cocurric">Co-Curricular</button>
+
+      <div class="tab-bar" role="tablist">
+        <button class="tab-btn active-tab" data-tab="olevel"   role="tab" aria-selected="true"  aria-controls="tab-olevel">Senior 1–2</button>
+        <button class="tab-btn"            data-tab="alevel"   role="tab" aria-selected="false" aria-controls="tab-alevel">Senior 3–4</button>
+        <button class="tab-btn"            data-tab="slevel"   role="tab" aria-selected="false" aria-controls="tab-slevel">Senior 5–6</button>
+        <button class="tab-btn"            data-tab="cocurric" role="tab" aria-selected="false" aria-controls="tab-cocurric">Co-Curricular</button>
       </div>
 
-      <div class="tab-content active-content" id="tab-olevel"><!-- Default tab shown on first load -->
-        <div class="two-col">
-          <div>
-            <!-- sch: lower-primary curriculum copy -->
-            <h3>Senior One to Senior Two</h3>
-            <p>Students build core understanding in key subjects while developing discipline, values, and learning confidence.</p>
-            <h4>Core Learning Areas</h4>
+      <!-- TAB: Senior 1-2 (icons with Font Awesome, all gold) -->
+      <div class="tab-content active-content" id="tab-olevel" role="tabpanel">
+        <h3>Senior One to Senior Two</h3>
+        <p>Students build core understanding in key subjects while developing discipline, values, and learning confidence.</p>
+        
+        <div class="program-cards" style="margin-top:1.5rem">
+          <article class="program-card">
+            <div class="card-icon"><i class="fas fa-book-open"></i></div>
+            <h3>Core Learning Areas</h3>
             <ul class="styled-list">
               <li>English Language</li>
               <li>Mathematics</li>
@@ -78,106 +189,150 @@
               <li>Religious Education</li>
               <li>Creative Arts &amp; Physical Education</li>
             </ul>
-            <h4>Enrichment Areas</h4>
+          </article>
+          <article class="program-card featured-card">
+            <div class="card-icon"><i class="fas fa-palette"></i></div>
+            <h3>Enrichment Areas</h3>
             <ul class="styled-list">
               <li>Storytelling &amp; Reading Clubs</li>
               <li>Music, Dance, and Drama</li>
               <li>Basic ICT and digital learning</li>
               <li>Local Language and Culture</li>
             </ul>
-          </div>
-          <div class="welcome-img-wrap">
-            <!-- sch: switched section image to local asset -->
-            <img src="images/sd_60365fbd788b7.jpg" alt="Classroom" class="welcome-img" />
-          </div>
+          </article>
+          <article class="program-card">
+            <div class="card-icon"><i class="fas fa-star-of-life"></i></div>
+            <h3>Character &amp; Values</h3>
+            <ul class="styled-list">
+              <li>Discipline & leadership foundations</li>
+              <li>Peer mentorship program</li>
+              <li>Community awareness</li>
+              <li>Environmental consciousness</li>
+            </ul>
+          </article>
+        </div>
+        
+        <div class="image-below-cards">
+          <img src="images/sd_60365fbd788b7.jpg" alt="Students in a classroom at Amus College School" class="welcome-img" />
         </div>
       </div>
 
-      <div class="tab-content" id="tab-alevel">
-        <div class="two-col">
-          <div>
-            <!-- sch: upper-primary curriculum copy -->
-            <h3>Senior Three to Senior Four</h3>
-            <p>Learners deepen understanding and prepare for UCE with structured coursework and continuous assessment.</p>
-            <div class="program-cards" style="margin-top:1.5rem">
-              <article class="program-card">
-                <div class="card-icon">🔬</div>
-                <h3>Core Academics</h3>
-                <ul class="styled-list">
-                  <li>English Language</li>
-                  <li>Mathematics</li>
-                  <li>Integrated Science</li>
-                </ul>
-              </article>
-              <article class="program-card featured-card">
-                <div class="card-icon">📖</div>
-                <h3>Humanities</h3>
-                <ul class="styled-list">
-                  <li>Social Studies</li>
-                  <li>Religious Education</li>
-                  <li>Reading Comprehension</li>
-                </ul>
-              </article>
-              <article class="program-card">
-                <div class="card-icon">💼</div>
-                <h3>Senior Five to Senior Six</h3>
-                <ul class="styled-list">
-                  <li>Advanced Subject Focus</li>
-                  <li>Talent and Leadership</li>
-                  <li>University and Career Readiness</li>
-                </ul>
-              </article>
-            </div>
-          </div>
+      <!-- TAB: Senior 3-4 (all white cards, gold icons) -->
+      <div class="tab-content" id="tab-alevel" role="tabpanel">
+        <h3>Senior Three to Senior Four</h3>
+        <p>Learners deepen understanding and prepare for UCE with structured coursework and continuous assessment.</p>
+        <div class="program-cards" style="margin-top:1.5rem">
+          <article class="program-card">
+            <div class="card-icon"><i class="fas fa-flask"></i></div>
+            <h3>Core Academics</h3>
+            <ul class="styled-list">
+              <li>English Language</li>
+              <li>Mathematics</li>
+              <li>Integrated Science</li>
+            </ul>
+          </article>
+          <article class="program-card featured-card">
+            <div class="card-icon"><i class="fas fa-landmark"></i></div>
+            <h3>Humanities</h3>
+            <ul class="styled-list">
+              <li>Social Studies</li>
+              <li>Religious Education</li>
+              <li>Reading Comprehension</li>
+            </ul>
+          </article>
+          <article class="program-card">
+            <div class="card-icon"><i class="fas fa-drafting-compass"></i></div>
+            <h3>Practical Subjects</h3>
+            <ul class="styled-list">
+              <li>Creative Arts</li>
+              <li>Physical Education</li>
+              <li>Computer Studies</li>
+            </ul>
+          </article>
         </div>
       </div>
 
-      <div class="tab-content" id="tab-cocurric">
+      <!-- TAB: Senior 5-6 (gold icons) -->
+      <div class="tab-content" id="tab-slevel" role="tabpanel">
+        <h3>Senior Five to Senior Six</h3>
+        <p>Advanced level studies preparing students for university entry and career readiness through focused subject combinations and leadership development.</p>
+        <div class="program-cards" style="margin-top:1.5rem">
+          <article class="program-card">
+            <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h3>Advanced Subject Focus</h3>
+            <ul class="styled-list">
+              <li>Sciences combination</li>
+              <li>Humanities combination</li>
+              <li>Business combination</li>
+            </ul>
+          </article>
+          <article class="program-card featured-card">
+            <div class="card-icon"><i class="fas fa-trophy"></i></div>
+            <h3>Talent &amp; Leadership</h3>
+            <ul class="styled-list">
+              <li>Student leadership roles</li>
+              <li>Community service projects</li>
+              <li>Mentorship programmes</li>
+            </ul>
+          </article>
+          <article class="program-card">
+            <div class="card-icon"><i class="fas fa-chalkboard-user"></i></div>
+            <h3>University &amp; Career Readiness</h3>
+            <ul class="styled-list">
+              <li>University application guidance</li>
+              <li>Career counselling</li>
+              <li>UACE examination preparation</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+
+      <!-- TAB: Co-Curricular (value-cards with gold icons) -->
+      <div class="tab-content" id="tab-cocurric" role="tabpanel">
         <h3>Co-Curricular Activities</h3>
-        <!-- sch: pupil wording -->
         <p>We believe education extends beyond the classroom. Every pupil is encouraged to participate in at least one co-curricular activity.</p>
-        <div class="values-grid" style="margin-top:2rem">
-          <div class="value-card"><div class="val-icon">⚽</div><h4>Sports</h4><p>Football, netball, basketball, volleyball, athletics, and swimming.</p></div>
-          <div class="value-card"><div class="val-icon">🎭</div><h4>Drama &amp; Arts</h4><p>Annual drama festival, fine art exhibitions, and creative writing competitions.</p></div>
-          <div class="value-card"><div class="val-icon">🗣️</div><h4>Debate Club</h4><p>Inter-school and national-level debates — developing critical thinking and public speaking.</p></div>
-          <div class="value-card"><div class="val-icon">🎵</div><h4>Music &amp; Choir</h4><p>School choir, band, and traditional music ensemble perform at national events.</p></div>
-          <div class="value-card"><div class="val-icon">💻</div><h4>ICT Club</h4><p>Coding, robotics, and digital design workshops led by industry mentors.</p></div>
-          <div class="value-card"><div class="val-icon">🌱</div><h4>Environment Club</h4><p>Tree planting, recycling drives, and sustainability education projects.</p></div>
+        <div class="values-grid section-light" style="margin-top:2rem">
+          <div class="value-card"><div class="val-icon"><i class="fas fa-futbol"></i></div><h4>Sports</h4><p>Football, netball, basketball, volleyball, athletics, and swimming.</p></div>
+          <div class="value-card"><div class="val-icon"><i class="fas fa-mask"></i></div><h4>Drama &amp; Arts</h4><p>Annual drama festival, fine art exhibitions, and creative writing competitions.</p></div>
+          <div class="value-card"><div class="val-icon"><i class="fas fa-microphone-alt"></i></div><h4>Debate Club</h4><p>Inter-school and national-level debates — developing critical thinking and public speaking.</p></div>
+          <div class="value-card"><div class="val-icon"><i class="fas fa-music"></i></div><h4>Music &amp; Choir</h4><p>School choir, band, and traditional music ensemble perform at national events.</p></div>
+          <div class="value-card"><div class="val-icon"><i class="fas fa-laptop-code"></i></div><h4>ICT Club</h4><p>Coding, robotics, and digital design workshops led by industry mentors.</p></div>
+          <div class="value-card"><div class="val-icon"><i class="fas fa-seedling"></i></div><h4>Environment Club</h4><p>Tree planting, recycling drives, and sustainability education projects.</p></div>
         </div>
       </div>
+
     </div>
   </section>
 
-  <!-- AMUS HIGHLIGHTS: replaces timetable with Amus-specific information -->
-  <section class="section-pad bg-light">
+  <!-- HIGHLIGHTS — light background, cards white, gold icons -->
+  <section class="section-pad highlights-section">
     <div class="container">
       <span class="section-label">Highlights</span>
       <h2>Location, Goals &amp; Admissions</h2>
-      <div class="values-grid" style="margin-top:2rem">
+      <div class="values-grid section-light" style="margin-top:2rem">
         <div class="value-card">
-          <div class="val-icon">📍</div>
+          <div class="val-icon"><i class="fas fa-map-marker-alt"></i></div>
           <h4>Location</h4>
           <p>Amus College School is located in Bukedea District, Eastern Uganda. One kilometer off Mbale-Soroti highway on Amus Sapir Hill.</p>
         </div>
         <div class="value-card">
-          <div class="val-icon">🎯</div>
+          <div class="val-icon"><i class="fas fa-bullseye"></i></div>
           <h4>Goals</h4>
           <p>The college is a universal institution interested in providing a bright future in both education and talent of the community.</p>
         </div>
         <div class="value-card">
-          <div class="val-icon">📞</div>
+          <div class="val-icon"><i class="fas fa-phone-alt"></i></div>
           <h4>Admissions</h4>
-          <p>Admission for all classes from Senior one to Senior six is ongoing. Please call now for more information. P.O. Box number 2058.</p>
+          <p>Admission for all classes from Senior One to Senior Six is ongoing. Please call now for more information. P.O. Box 2058.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER: shared footer component -->
+  <!-- FOOTER (balanced with icons) -->
   <footer id="main-footer">
     <div class="footer-inner">
       <div class="footer-col">
-        <!-- sch: footer branding updated -->
         <div class="footer-logo">✦ Amus College School</div>
         <p>Let there be light<br />Bukedea District, Eastern Uganda</p>
       </div>
@@ -193,26 +348,103 @@
       </div>
       <div class="footer-col">
         <h5>Contact</h5>
-        <!-- sch: contact email updated -->
-        <address>P.O. Box 2058<br />📞 +256 414 000 000<br />✉ info@amuscollegeschool.ac.ug</address>
+        <address>
+          P.O. Box 2058<br />
+          <i class="fas fa-phone-alt" style="margin-right: 0.4rem;"></i> +256 414 000 000<br />
+          <i class="fas fa-envelope" style="margin-right: 0.4rem;"></i> info@amuscollegeschool.ac.ug
+        </address>
       </div>
       <div class="footer-col">
         <h5>Follow Us</h5>
         <div class="social-links">
-          <a href="#" class="social-btn">Facebook</a>
-          <a href="#" class="social-btn">Twitter</a>
-          <a href="#" class="social-btn">YouTube</a>
+          <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="#" class="social-btn"><i class="fab fa-twitter"></i> Twitter</a>
+          <a href="#" class="social-btn"><i class="fab fa-youtube"></i> YouTube</a>
         </div>
       </div>
     </div>
-    <!-- sch: copyright name updated -->
     <div class="footer-bottom"><p>&copy; 2026 Amus College School. All rights reserved.</p></div>
   </footer>
 
-  <!-- sch: floating enrol CTA separate from navbar -->
+  <!-- FLOATING CTA -->
   <a href="contact.html#registration" class="floating-enrol-btn">Enrol Now</a>
 
-  <script src="main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // Brand injection
+      const brand = { name: 'Amus College School', tagline: 'Let there be light', city: 'Bukedea District, Eastern Uganda', email: 'info@amuscollegeschool.ac.ug' };
+      document.querySelectorAll('.logo-name').forEach(el => el.textContent = brand.name);
+      document.querySelectorAll('.logo-tag').forEach(el => el.textContent = brand.tagline);
+      document.querySelectorAll('.footer-logo').forEach(el => el.textContent = `✦ ${brand.name}`);
+      const pageTitle = document.body.getAttribute('data-page-title');
+      if (pageTitle) document.title = `${brand.name} – ${pageTitle}`;
+
+      // Header scroll shadow
+      const header = document.getElementById('main-header');
+      if (header) window.addEventListener('scroll', () => {
+        header.style.boxShadow = window.scrollY > 30 ? '0 4px 24px rgba(0,0,0,0.4)' : '';
+      });
+
+      // Hamburger menu
+      const hamburger = document.getElementById('hamburger');
+      const mainNav   = document.getElementById('main-nav');
+      if (hamburger && mainNav) {
+        hamburger.addEventListener('click', () => {
+          const isOpen = mainNav.classList.toggle('open');
+          hamburger.setAttribute('aria-expanded', String(isOpen));
+          const [a, b, c] = hamburger.querySelectorAll('span');
+          if (isOpen) {
+            a.style.transform = 'rotate(45deg) translate(5px, 5px)';
+            b.style.opacity   = '0';
+            c.style.transform = 'rotate(-45deg) translate(5px, -5px)';
+          } else {
+            [a, b, c].forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+          }
+        });
+        mainNav.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', () => {
+            mainNav.classList.remove('open');
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+          });
+        });
+      }
+
+      // Tab switching
+      const tabBtns     = document.querySelectorAll('.tab-btn');
+      const tabContents = document.querySelectorAll('.tab-content');
+      if (tabBtns.length) {
+        tabBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            tabBtns.forEach(b => { b.classList.remove('active-tab'); b.setAttribute('aria-selected', 'false'); });
+            tabContents.forEach(c => c.classList.remove('active-content'));
+            btn.classList.add('active-tab');
+            btn.setAttribute('aria-selected', 'true');
+            document.getElementById(`tab-${btn.dataset.tab}`)?.classList.add('active-content');
+          });
+        });
+      }
+
+      // Scroll reveal (only for cards)
+      const revealEls = document.querySelectorAll('.program-card, .value-card');
+      if ('IntersectionObserver' in window && revealEls.length) {
+        const obs = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            e.target.style.opacity   = '1';
+            e.target.style.transform = 'translateY(0)';
+            obs.unobserve(e.target);
+          });
+        }, { threshold: 0.1 });
+        revealEls.forEach(el => {
+          el.style.opacity    = '0';
+          el.style.transform  = 'translateY(18px)';
+          el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+          obs.observe(el);
+        });
+      }
+    });
+  </script>
 </body>
 </html>
-
