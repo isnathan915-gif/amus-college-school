@@ -48,16 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (pageTitle) document.title = `${brand.name} – ${pageTitle}`;
 
   const header = document.getElementById('main-header');
-  const scrollToTopBtn = document.getElementById('scroll-to-top');
-  if (header || scrollToTopBtn) {
+  if (header) {
     window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY > 30;
-      if (header) header.classList.toggle('scrolled', scrolled);
-      if (scrollToTopBtn) scrollToTopBtn.classList.toggle('visible', scrolled);
+      header.classList.toggle('scrolled', window.scrollY > 30);
     });
-  }
-  if (scrollToTopBtn) {
-    scrollToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
 
   const hamburger = document.getElementById('hamburger');
