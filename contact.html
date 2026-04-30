@@ -136,7 +136,7 @@
       }
     }
 
-    /* ========== MOBILE HEADER FIX (override global) ========== */
+    /* ========== MOBILE HEADER FIX – Far left logo, far right hamburger ========== */
     @media (max-width: 768px) {
       #main-header {
         display: flex !important;
@@ -149,8 +149,23 @@
         right: 0;
         z-index: 1000;
       }
-      .mobile-top-bar {
-        display: none !important;
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* pushes logo left, hamburger right */
+        width: 100%;
+        padding: 0 1.5rem;
+      }
+      .logo-block {
+        flex: 0 0 auto; /* prevents stretching */
+      }
+      .hamburger {
+        display: flex !important;
+        position: relative !important;
+        right: auto !important;
+        top: auto !important;
+        margin-left: auto; /* ensures far right */
+        order: 2; /* makes sure it's last */
       }
       #main-nav {
         position: fixed;
@@ -162,6 +177,7 @@
         transform: translateY(-200%);
         transition: transform 0.3s ease;
         z-index: 999;
+        order: 1;
       }
       #main-nav.open {
         transform: translateY(0);
@@ -176,11 +192,9 @@
         padding: 0.75rem 0;
         border-bottom: 1px solid rgba(255,255,255,0.07);
       }
-      .hamburger {
-        display: flex !important;
-        position: relative;
-        right: auto;
-        top: auto;
+      /* Hide the desktop nav on mobile (it's already hidden by global, but ensure) */
+      #main-nav:not(.open) {
+        display: block; /* needed for transform, but content is off-screen */
       }
     }
   </style>
@@ -226,7 +240,7 @@
     <div class="container two-col">
       <div>
         <span class="section-label">Find Us</span>
-        <h2>Contact InformationNN</h2>
+        <h2>Contact Information</h2>
         <ul class="contact-info-list">
           <li>
             <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
@@ -259,7 +273,7 @@
         </ul>
       </div>
       <div>
-        <!-- Map placeholder removed as requested -->
+        <!-- Map placeholder removed -->
       </div>
     </div>
   </section>
@@ -534,7 +548,7 @@
         });
       }
 
-      // Form validation and submission (stub for demo)
+      // Simple form validation (demo)
       const regForm = document.getElementById('registration-form');
       const contactForm = document.getElementById('contact-form');
       const formSuccess = document.getElementById('form-success');
@@ -544,7 +558,6 @@
       if (regForm) {
         regForm.addEventListener('submit', (e) => {
           e.preventDefault();
-          // Basic validation simulation
           let isValid = true;
           const required = ['first-name', 'last-name', 'dob', 'gender', 'grade', 'parent-name', 'relationship', 'phone-number', 'email', 'agree'];
           required.forEach(id => {
