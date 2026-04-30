@@ -308,7 +308,7 @@
       background: var(--gold-light);
     }
 
-    /* ========== MOBILE HEADER FIX (override global) ========== */
+    /* ========== MOBILE HEADER FIX – Far left logo, far right hamburger ========== */
     @media (max-width: 768px) {
       #main-header {
         display: flex !important;
@@ -321,8 +321,23 @@
         right: 0;
         z-index: 1000;
       }
-      .mobile-top-bar {
-        display: none !important;
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 1.5rem;
+      }
+      .logo-block {
+        flex: 0 0 auto;
+      }
+      .hamburger {
+        display: flex !important;
+        position: relative !important;
+        right: auto !important;
+        top: auto !important;
+        margin-left: auto;
+        order: 2;
       }
       #main-nav {
         position: fixed;
@@ -347,12 +362,6 @@
         display: block;
         padding: 0.75rem 0;
         border-bottom: 1px solid rgba(255,255,255,0.07);
-      }
-      .hamburger {
-        display: flex !important;
-        position: relative;
-        right: auto;
-        top: auto;
       }
       .two-col {
         grid-template-columns: 1fr;
@@ -445,12 +454,12 @@
             <tr><th>Name</th><th>Position</th><th>Department</th><th>Qualifications</th></tr>
           </thead>
           <tbody>
-            <tr><td>Mr. Joseph Ssemwanga</td><td>Headmaster</td><td>Administration</td><td>M.Ed, Makerere University</td></tr>
-            <tr><td>Ms. Agnes Nakato</td><td>Deputy Headmistress (Academics)</td><td>Administration</td><td>B.Ed (Hons), Kyambogo</td></tr>
-            <tr><td>Mr. Robert Ayo</td><td>Head of Sciences</td><td>Sciences</td><td>B.Sc, M.Sc Chemistry</td></tr>
-            <tr><td>Mrs. Patience Auma</td><td>Head of Humanities</td><td>Arts & Humanities</td><td>B.A History, PGDE</td></tr>
-            <tr><td>Mr. Brian Tumwine</td><td>Sports Director</td><td>Co-Curricular</td><td>B.Sc Sports Science</td></tr>
-            <tr><td>Sr. Catherine Nalwoga</td><td>School Chaplain</td><td>Pastoral</td><td>Divinity, Immaculate Heart College</td></tr>
+            <tr><td>Mr. Joseph Ssemwanga<\/td><td>Headmaster<\/td><td>Administration<\/td><td>M.Ed, Makerere University<\/td></tr>
+            <tr><td>Ms. Agnes Nakato<\/td><td>Deputy Headmistress (Academics)<\/td><td>Administration<\/td><td>B.Ed (Hons), Kyambogo<\/td></tr>
+            <tr><td>Mr. Robert Ayo<\/td><td>Head of Sciences<\/td><td>Sciences<\/td><td>B.Sc, M.Sc Chemistry<\/td></tr>
+            <tr><td>Mrs. Patience Auma<\/td><td>Head of Humanities<\/td><td>Arts & Humanities<\/td><td>B.A History, PGDE<\/td></tr>
+            <tr><td>Mr. Brian Tumwine<\/td><td>Sports Director<\/td><td>Co-Curricular<\/td><td>B.Sc Sports Science<\/td></tr>
+            <tr><td>Sr. Catherine Nalwoga<\/td><td>School Chaplain<\/td><td>Pastoral<\/td><td>Divinity, Immaculate Heart College<\/td></tr>
           </tbody>
         </table>
       </div>
@@ -473,7 +482,7 @@
     </div>
   </section>
 
-  <!-- FOOTER (with Font Awesome icons) -->
+  <!-- FOOTER -->
   <footer id="main-footer">
     <div class="footer-inner">
       <div class="footer-col">
