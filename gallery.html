@@ -171,7 +171,7 @@
       color: #ffffff;
     }
 
-    /* ========== MOBILE HEADER FIX (override global) ========== */
+    /* ========== MOBILE HEADER FIX – Far left logo, far right hamburger ========== */
     @media (max-width: 768px) {
       #main-header {
         display: flex !important;
@@ -184,8 +184,23 @@
         right: 0;
         z-index: 1000;
       }
-      .mobile-top-bar {
-        display: none !important;
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 1.5rem;
+      }
+      .logo-block {
+        flex: 0 0 auto;
+      }
+      .hamburger {
+        display: flex !important;
+        position: relative !important;
+        right: auto !important;
+        top: auto !important;
+        margin-left: auto;
+        order: 2;
       }
       #main-nav {
         position: fixed;
@@ -211,11 +226,9 @@
         padding: 0.75rem 0;
         border-bottom: 1px solid rgba(255,255,255,0.07);
       }
-      .hamburger {
-        display: flex !important;
-        position: relative;
-        right: auto;
-        top: auto;
+      /* Hide the desktop nav on mobile (it's already hidden by global, but ensure) */
+      #main-nav:not(.open) {
+        display: block; /* needed for transform, but content is off-screen */
       }
     }
   </style>
