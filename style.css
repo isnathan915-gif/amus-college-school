@@ -231,12 +231,23 @@ ul { list-style: none; }
   border: none;
   cursor: pointer;
   padding: 4px;
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
+}
+.hamburger:focus,
+.hamburger:focus-visible,
+.hamburger:active {
+  outline: none;
+  box-shadow: none;
+  background: transparent;
 }
 .hamburger span {
   display: block;
   width: 24px; height: 2px;
   background: var(--white);
   transition: all var(--transition);
+  position: relative;
+  z-index: 2;
 }
 
 /* ===========================
@@ -972,6 +983,8 @@ body > section:first-of-type:not(#hero),
     z-index: 1301;
     flex-shrink: 0;
     margin-left: auto;
+    background: transparent !important;
+    border: 0 !important;
   }
 
   .two-col { grid-template-columns: 1fr; gap: 2rem; }
