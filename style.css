@@ -254,10 +254,11 @@ body > section:first-of-type:not(#hero), .page-banner { margin-top: var(--header
 }
 
 @media (max-width: 768px) {
-  .hamburger { display: flex; }
+  #main-header { background: transparent; backdrop-filter: none; }
+  .hamburger { display: flex; background: var(--navy); border: 1px solid var(--gold); }
   .logo-tag { display: none; }
-  .header-inner { padding: 0 1rem; position: relative; }
-  .logo-block { max-width: calc(100% - 60px); z-index: 1001; position: relative; }
+  .header-inner { padding: 0 1rem; }
+  .logo-block { max-width: calc(100% - 60px); }
   .logo-name { font-size: 0.85rem; max-width: 100%; }
   .two-col { grid-template-columns: 1fr; gap: 2rem; }
   .news-grid { grid-template-columns: 1fr; }
