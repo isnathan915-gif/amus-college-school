@@ -1,21 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const brand = {
-    name: 'Amus College School',
-    tagline: 'Let there be light',
-    city: 'Bukedea District, Eastern Uganda',
-    email: 'info@amuscollegeschool.ac.ug',
-  };
+  const brand = { name: 'Amus College School', tagline: 'Let there be light', city: 'Bukedea District, Eastern Uganda', email: 'info@amuscollegeschool.ac.ug' };
 
   const setHamburgerIcon = (btn, isOpen) => {
-    const [a, b, c] = btn.querySelectorAll('span');
-    if (!a || !b || !c) return;
+    const spans = btn.querySelectorAll('span');
+    if (spans.length < 3) return;
+    const [a, b, c] = spans;
     if (isOpen) {
       a.style.transform = 'rotate(45deg) translate(5px, 5px)';
       b.style.opacity = '0';
       c.style.transform = 'rotate(-45deg) translate(5px, -5px)';
-      return;
+    } else {
+      a.style.transform = '';
+      b.style.opacity = '';
+      c.style.transform = '';
     }
-    [a, b, c].forEach((s) => { s.style.transform = ''; s.style.opacity = ''; });
   };
 
   const setError = (inputId, errorId, message) => {
@@ -36,15 +34,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
   const isValidPhone = (value) => /^[0-9\s\-]{6,15}$/.test(value);
 
-  document.querySelectorAll('.logo-name').forEach((el) => { el.textContent = brand.name; });
-  document.querySelectorAll('.logo-tag').forEach((el) => { el.textContent = brand.tagline; });
-  document.querySelectorAll('.footer-logo').forEach((el) => { el.textContent = `✦ ${brand.name}`; });
+  document.querySelectorAll('.logo-name').forEach((el) => el.textContent = brand.name);
+  document.querySelectorAll('.logo-tag').forEach((el) => el.textContent = brand.tagline);
+  document.querySelectorAll('.footer-logo').forEach((el) => el.textContent = `✦ ${brand.name}`);
   document.querySelectorAll('#main-footer .footer-col p').forEach((el) => {
-    if (el.innerHTML.includes('<br')) el.innerHTML = `${brand.tagline}<br />${brand.city}`;
+    if (el.innerHTML.includes('<br')) el.innerHTML = `${brand.tagline}<br>${brand.city}`;
   });
   document.querySelectorAll('#main-footer address').forEach((el) => {
     el.innerHTML = el.innerHTML.replace(/✉\s*[^<\n]+/g, `✉ ${brand.email}`);
   });
+
   const pageTitle = document.body.getAttribute('data-page-title');
   if (pageTitle) document.title = `${brand.name} – ${pageTitle}`;
 
@@ -54,10 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
       const scrolled = window.scrollY > 30;
       if (header) header.classList.toggle('scrolled', scrolled);
-      if (scrollToTopBtn) {
-        scrollToTopBtn.style.opacity = scrolled ? '1' : '0';
-        scrollToTopBtn.style.visibility = scrolled ? 'visible' : 'hidden';
-      }
+      if (scrollToTopBtn) scrollToTopBtn.classList.toggle('visible', scrolled);
     });
   }
   if (scrollToTopBtn) {
@@ -73,10 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setHamburgerIcon(hamburger, isOpen);
     });
     mainNav.querySelectorAll('.nav-link').forEach((link) => {
-      link.addEventListener('click', () => {
-        mainNav.classList.remove('open');
-        setHamburgerIcon(hamburger, false);
-      });
+      link.addEventListener('click', () => { mainNav.classList.remove('open'); setHamburgerIcon(hamburger, false); });
     });
   }
 
@@ -87,10 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const dots = [];
     const goTo = (n) => {
       slides[current].classList.remove('active');
-      dots[current].classList.remove('active');
+      dots[current]?.classList.remove('active');
       current = (n + slides.length) % slides.length;
       slides[current].classList.add('active');
-      dots[current].classList.add('active');
+      dots[current]?.classList.add('active');
     };
     slides.forEach((_, i) => {
       const dot = document.createElement('button');
@@ -101,11 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dotsWrap.appendChild(dot);
       dots.push(dot);
     });
-    let timer = setInterval(() => goTo(current + 1), 5000);
-    dotsWrap.addEventListener('click', () => {
-      clearInterval(timer);
-      timer = setInterval(() => goTo(current + 1), 5000);
-    });
+    setInterval(() => goTo(current + 1), 5000);
   }
 
   const animateCounter = (el) => {
@@ -114,10 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const start = performance.now();
     const update = (now) => {
       const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = String(Math.floor(eased * target));
+      el.textContent = String(Math.floor(progress * target));
       if (progress < 1) requestAnimationFrame(update);
-      else el.textContent = String(target);
     };
     requestAnimationFrame(update);
   };
@@ -156,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const filter = btn.getAttribute('data-filter');
         galleryItems.forEach((item) => {
           const cat = item.getAttribute('data-category');
-          item.classList.toggle('hidden', !(filter === 'all' || cat === filter));
+          item.classList.toggle('hidden', filter !== 'all' && cat !== filter);
         });
       });
     });
@@ -174,14 +161,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const visibleItems = () => Array.from(galleryItems).filter((i) => !i.classList.contains('hidden'));
     const open = (index) => {
       const items = visibleItems();
-      if (!items.length || !lightboxImg || !lightboxCaption) return;
+      if (!items.length || !lightboxImg) return;
       current = index;
       const img = items[index].querySelector('img');
       const caption = items[index].querySelector('.gallery-overlay span');
       if (!img) return;
       lightboxImg.src = img.src;
-      lightboxImg.alt = img.alt;
-      lightboxCaption.textContent = caption ? caption.textContent : '';
+      lightboxImg.alt = img.alt || '';
+      if (lightboxCaption) lightboxCaption.textContent = caption ? caption.textContent : '';
       lightbox.classList.remove('hidden');
       lightboxBackdrop?.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
@@ -191,19 +178,11 @@ document.addEventListener('DOMContentLoaded', () => {
       lightboxBackdrop?.classList.add('hidden');
       document.body.style.overflow = '';
     };
-    galleryItems.forEach((item) => {
-      item.addEventListener('click', () => open(visibleItems().indexOf(item)));
-    });
+    galleryItems.forEach((item) => item.addEventListener('click', () => open(visibleItems().indexOf(item))));
     lightboxClose?.addEventListener('click', close);
     lightboxBackdrop?.addEventListener('click', close);
-    lightboxPrev?.addEventListener('click', () => {
-      const items = visibleItems();
-      open((current - 1 + items.length) % items.length);
-    });
-    lightboxNext?.addEventListener('click', () => {
-      const items = visibleItems();
-      open((current + 1) % items.length);
-    });
+    lightboxPrev?.addEventListener('click', () => { const items = visibleItems(); open((current - 1 + items.length) % items.length); });
+    lightboxNext?.addEventListener('click', () => { const items = visibleItems(); open((current + 1) % items.length); });
     document.addEventListener('keydown', (e) => {
       if (lightbox.classList.contains('hidden')) return;
       if (e.key === 'Escape') close();
@@ -220,7 +199,8 @@ document.addEventListener('DOMContentLoaded', () => {
         tabBtns.forEach((b) => b.classList.remove('active-tab'));
         tabContents.forEach((c) => c.classList.remove('active-content'));
         btn.classList.add('active-tab');
-        document.getElementById(`tab-${btn.getAttribute('data-tab')}`)?.classList.add('active-content');
+        const tabId = `tab-${btn.getAttribute('data-tab')}`;
+        document.getElementById(tabId)?.classList.add('active-content');
       });
     });
   }
@@ -241,10 +221,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const validatePhoneParts = () => {
       const ccEl = document.getElementById('country-code');
       const pnEl = document.getElementById('phone-number');
-      const cc = ccEl ? ccEl.value.trim() : '';
-      const pn = pnEl ? pnEl.value.trim() : '';
+      const cc = ccEl?.value.trim() || '';
+      const pn = pnEl?.value.trim() || '';
       const ok = cc !== '' && isValidPhone(pn);
-      [ccEl, pnEl].forEach((el) => el?.classList.toggle('error', !ok));
+      if (ccEl) ccEl.classList.toggle('error', !ok);
+      if (pnEl) pnEl.classList.toggle('error', !ok);
       const err = document.getElementById('err-phone');
       if (err) err.textContent = ok ? '' : 'Please select a country code and enter a valid phone number.';
       return ok;
@@ -253,11 +234,10 @@ document.addEventListener('DOMContentLoaded', () => {
     regFields.forEach(({ input, error, check, msg }) => {
       const el = document.getElementById(input);
       if (!el) return;
-      el.addEventListener('blur', () => (check(el.value.trim()) ? clearError(input, error) : setError(input, error, msg)));
+      el.addEventListener('blur', () => check(el.value.trim()) ? clearError(input, error) : setError(input, error, msg));
       el.addEventListener('input', () => clearError(input, error));
     });
     document.getElementById('country-code')?.addEventListener('change', validatePhoneParts);
-    document.getElementById('country-code')?.addEventListener('input', validatePhoneParts);
     document.getElementById('phone-number')?.addEventListener('blur', validatePhoneParts);
     document.getElementById('phone-number')?.addEventListener('input', validatePhoneParts);
 
@@ -273,17 +253,15 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       if (!validatePhoneParts()) valid = false;
       const agreeEl = document.getElementById('agree');
-      if (agreeEl && !agreeEl.checked) {
-        setError('agree', 'err-agree', 'You must agree to the terms to submit.');
-        valid = false;
-      } else clearError('agree', 'err-agree');
+      if (agreeEl && !agreeEl.checked) { setError('agree', 'err-agree', 'You must agree to the terms to submit.'); valid = false; }
+      else clearError('agree', 'err-agree');
 
       if (valid) {
         regForm.classList.add('hidden');
         document.getElementById('form-success')?.classList.remove('hidden');
-        return;
+      } else {
+        regForm.querySelector('.error')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
-      regForm.querySelector('.error')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 
     document.getElementById('form-reset-btn')?.addEventListener('click', () => {
@@ -314,10 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!valid) return;
       contactForm.reset();
       const successEl = document.getElementById('contact-success');
-      if (successEl) {
-        successEl.classList.remove('hidden');
-        setTimeout(() => successEl.classList.add('hidden'), 6000);
-      }
+      if (successEl) { successEl.classList.remove('hidden'); setTimeout(() => successEl.classList.add('hidden'), 6000); }
     });
     ['c-name', 'c-email', 'c-subject', 'c-message'].forEach((id) => {
       document.getElementById(id)?.addEventListener('input', () => clearError(id, `err-${id}`));
@@ -334,11 +309,10 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObserver.unobserve(entry.target);
       });
     }, { threshold: 0.1 });
-    revealEls.forEach((el, i) => {
-      const delay = (i % 4) * 0.1;
+    revealEls.forEach((el) => {
       el.style.opacity = '0';
-      el.style.transform = 'translateY(24px)';
-      el.style.transition = `opacity 0.6s ease ${delay}s, transform 0.6s ease ${delay}s`;
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
       revealObserver.observe(el);
     });
   }
