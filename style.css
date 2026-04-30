@@ -107,7 +107,7 @@ p { margin-bottom: 1rem; color: var(--text-light); }
   border-radius: 999px;
 }
 
-.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; position: relative; z-index: 1001; }
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; position: fixed; right: 1rem; top: 1.25rem; z-index: 1001; }
 .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); }
 
 #hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: center; justify-content: center; }
@@ -256,6 +256,9 @@ body > section:first-of-type:not(#hero), .page-banner { margin-top: var(--header
 @media (max-width: 768px) {
   .hamburger { display: flex; }
   .logo-tag { display: none; }
+  .header-inner { padding: 0 1rem; position: relative; }
+  .logo-block { max-width: calc(100% - 60px); z-index: 1001; position: relative; }
+  .logo-name { font-size: 0.85rem; max-width: 100%; }
   .two-col { grid-template-columns: 1fr; gap: 2rem; }
   .news-grid { grid-template-columns: 1fr; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
