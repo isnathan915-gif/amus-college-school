@@ -3,14 +3,205 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- sch: changed site identity to primary school -->
   <title>Amus College School – Contact &amp; Registration</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
-  <!-- sch: removed external Google Fonts link for local-only setup -->
+  <style>
+    /* Additional consistency fixes */
+    .logo-block > div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.2;
+    }
+    .logo-name {
+      margin-bottom: 0.1rem;
+    }
+    .logo-tag {
+      font-size: 0.65rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+    .contact-info-list {
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+    .contact-info-list li {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+    .ci-icon {
+      font-size: 1.4rem;
+      color: var(--gold);
+      width: 2rem;
+    }
+    .contact-info-list strong {
+      display: block;
+      color: var(--navy);
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+    .contact-info-list p {
+      color: var(--text-light);
+      margin: 0;
+    }
+    .form-success {
+      background: #d4edda;
+      border: 1px solid #c3e6cb;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      color: #155724;
+      margin-bottom: 2rem;
+    }
+    .form-success.hidden {
+      display: none;
+    }
+    .success-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: #28a745;
+    }
+    .required {
+      color: #c0392b;
+    }
+    .phone-split {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0.75rem;
+    }
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .checkbox-single {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+    .form-submit-row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--gold);
+      color: var(--gold);
+    }
+    .btn-outline:hover {
+      background: var(--gold);
+      color: var(--navy);
+    }
+    /* Ensure footer social buttons have icons */
+    .social-btn i {
+      margin-right: 0.4rem;
+    }
+    /* Make contact section two-col layout work */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    /* Force banner text to white */
+    .banner-content h1, .banner-content p {
+      color: #ffffff;
+    }
+    @media (max-width: 768px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+      .phone-split {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ========== MOBILE HEADER FIX – Far left logo, far right hamburger ========== */
+    @media (max-width: 768px) {
+      #main-header {
+        display: flex !important;
+        height: var(--header-h) !important;
+        background: var(--navy) !important;
+        backdrop-filter: none !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+      }
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* pushes logo left, hamburger right */
+        width: 100%;
+        padding: 0 1.5rem;
+      }
+      .logo-block {
+        flex: 0 0 auto; /* prevents stretching */
+      }
+      .hamburger {
+        display: flex !important;
+        position: relative !important;
+        right: auto !important;
+        top: auto !important;
+        margin-left: auto; /* ensures far right */
+        order: 2; /* makes sure it's last */
+      }
+      #main-nav {
+        position: fixed;
+        top: var(--header-h);
+        left: 0;
+        right: 0;
+        background: var(--navy);
+        padding: 1rem 1.5rem;
+        transform: translateY(-200%);
+        transition: transform 0.3s ease;
+        z-index: 999;
+        order: 1;
+      }
+      #main-nav.open {
+        transform: translateY(0);
+        display: block !important;
+      }
+      #main-nav ul {
+        flex-direction: column;
+        gap: 0;
+      }
+      .nav-link {
+        display: block;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+      }
+      /* Hide the desktop nav on mobile (it's already hidden by global, but ensure) */
+      #main-nav:not(.open) {
+        display: block; /* needed for transform, but content is off-screen */
+      }
+    }
+  </style>
 </head>
 <body data-page-title="Contact & Admissions">
 
-  <!-- HEADER / NAV: common navigation bar -->
+  <!-- HEADER / NAV -->
   <header id="main-header">
     <div class="header-inner">
       <div class="logo-block">
@@ -22,36 +213,29 @@
       </div>
       <nav id="main-nav">
         <ul>
-      <li><a href="index.html" class="nav-link">Home</a></li>
-      <li><a href="about.html" class="nav-link">About</a></li>
-      <li><a href="academics.html" class="nav-link">Academics</a></li>
-      <li><a href="gallery.html" class="nav-link">Gallery</a></li>
-      <li><a href="contact.html" class="nav-link active">Contact</a></li>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="academics.html" class="nav-link">Academics</a></li>
+          <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+          <li><a href="contact.html" class="nav-link active">Contact</a></li>
         </ul>
       </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
-  <div class="mobile-top-bar">
-    <div class="mobile-logo">
-      <img src="images/sd_634c3c886d6c9.jpg" alt="Amus College School" />
-      <span>Amus College School</span>
-    </div>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-  <!-- PAGE BANNER: page intro and purpose -->
-  <!-- sch: switched banner image to local asset -->
+
+  <!-- PAGE BANNER -->
   <section class="page-banner" style="background-image: url('images/sd_63274e34be51c.jpg')">
     <div class="banner-overlay"></div>
     <div class="banner-content">
-      <!-- sch: updated banner wording -->
       <h1>Contact &amp; Admissions</h1>
       <p>Get in touch or begin your child's journey with Amus College School today.</p>
     </div>
   </section>
 
-  <!-- CONTACT INFO + MAP: direct office details for parents/students -->
+  <!-- CONTACT INFO -->
   <section class="section-pad">
     <div class="container two-col">
       <div>
@@ -59,28 +243,28 @@
         <h2>Contact Information</h2>
         <ul class="contact-info-list">
           <li>
-            <span class="ci-icon">📍</span>
+            <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
             <div>
               <strong>Address</strong>
               <p>Bukedea District, Eastern Uganda<br />1 kilometer off Mbale-Soroti highway on Amus Sapir Hill<br />P.O. Box 2058</p>
             </div>
           </li>
           <li>
-            <span class="ci-icon">📞</span>
+            <div class="ci-icon"><i class="fas fa-phone-alt"></i></div>
             <div>
               <strong>Phone</strong>
               <p>+256 414 000 000<br />+256 772 000 000</p>
             </div>
           </li>
           <li>
-            <span class="ci-icon">✉️</span>
+            <div class="ci-icon"><i class="fas fa-envelope"></i></div>
             <div>
               <strong>Email</strong>
               <p>info@amuscollegeschool.ac.ug<br />admissions@amuscollegeschool.ac.ug</p>
             </div>
           </li>
           <li>
-            <span class="ci-icon">🕐</span>
+            <div class="ci-icon"><i class="fas fa-clock"></i></div>
             <div>
               <strong>Office Hours</strong>
               <p>Mon–Fri: 8:00 AM – 5:00 PM<br />Saturday: 9:00 AM – 12:00 PM</p>
@@ -88,38 +272,39 @@
           </li>
         </ul>
       </div>
+      <div>
+        <!-- Map placeholder removed -->
+      </div>
     </div>
   </section>
 
-  <!-- REGISTRATION FORM: full admissions form validated in main.js -->
+  <!-- REGISTRATION FORM -->
   <section class="section-pad bg-light" id="registration">
     <div class="container">
       <span class="section-label">Apply</span>
-      <!-- sch: changed student wording to pupil/primary admissions -->
       <h2>Student Admission Form (S1-S6)</h2>
       <p class="form-intro">Complete the form below to begin the admissions process for your child. Our office will contact you within 2 working days.</p>
 
-      <div id="form-success" class="form-success hidden"><!-- Shown only after valid form submission -->
-        <div class="success-icon">✅</div>
+      <div id="form-success" class="form-success hidden">
+        <div class="success-icon"><i class="fas fa-check-circle"></i></div>
         <h3>Application Submitted!</h3>
         <p>Thank you! We have received your registration. Our admissions team will reach out within 2 working days.</p>
         <button class="btn btn-primary" id="form-reset-btn">Submit Another</button>
       </div>
 
-      <form id="registration-form" class="reg-form" novalidate><!-- `novalidate` lets custom JS validation run -->
+      <form id="registration-form" class="reg-form" novalidate>
         <!-- PERSONAL INFO -->
         <fieldset>
-            <!-- sch: fieldset label updated -->
-            <legend>Pupil Information</legend>
+          <legend>Pupil Information</legend>
           <div class="form-row">
             <div class="form-group">
               <label for="first-name">First Name <span class="required">*</span></label>
-              <input type="text" id="first-name" name="first-name" placeholder="e.g. Opu" />
+              <input type="text" id="first-name" name="first-name" placeholder="e.g. Nababi" />
               <span class="error-msg" id="err-first-name"></span>
             </div>
             <div class="form-group">
               <label for="last-name">Last Name <span class="required">*</span></label>
-              <input type="text" id="last-name" name="last-name" placeholder="e.g. Jesse" />
+              <input type="text" id="last-name" name="last-name" placeholder="e.g. Burushit" />
               <span class="error-msg" id="err-last-name"></span>
             </div>
           </div>
@@ -144,7 +329,6 @@
               <label for="grade">Applying for Class (Secondary) <span class="required">*</span></label>
               <select id="grade" name="grade">
                 <option value="">-- Select --</option>
-                <!-- sch: switched class options to primary levels -->
                 <option value="s1">S1 (Senior 1)</option>
                 <option value="s2">S2 (Senior 2)</option>
                 <option value="s3">S3 (Senior 3)</option>
@@ -185,16 +369,15 @@
           <div class="form-row">
             <div class="form-group">
               <label for="country-code">Phone Number <span class="required">*</span></label>
-              <!-- sch: split phone into country code + local number -->
               <div class="phone-split">
                 <select id="country-code" name="country-code">
                   <option value="">Code</option>
-                  <!-- sch: label shows country, value stays only dial code -->
                   <option value="+256">+256 Uganda</option>
                   <option value="+254">+254 Kenya</option>
                   <option value="+255">+255 Tanzania</option>
                   <option value="+250">+250 Rwanda</option>
-                  <option value="+211">+211 South Sudan</option>
+                  <option value="+1">+1 United States</option>
+                  <option value="+44">+44 United Kingdom</option>
                 </select>
                 <input type="tel" id="phone-number" name="phone-number" placeholder="7XX XXX XXX" />
               </div>
@@ -212,7 +395,7 @@
         <fieldset>
           <legend>Additional Information</legend>
           <div class="form-group">
-            <label for="interests">Extracurricular Interests</label>
+            <label>Extracurricular Interests</label>
             <div class="checkbox-group">
               <label><input type="checkbox" name="interests" value="sports" /> Sports</label>
               <label><input type="checkbox" name="interests" value="drama" /> Drama &amp; Arts</label>
@@ -243,7 +426,7 @@
     </div>
   </section>
 
-  <!-- CONTACT ENQUIRY FORM: shorter general message form -->
+  <!-- GENERAL ENQUIRY FORM -->
   <section class="section-pad">
     <div class="container" style="max-width:700px">
       <span class="section-label">General Enquiry</span>
@@ -273,17 +456,16 @@
         </div>
         <button type="submit" class="btn btn-primary">Send Message</button>
         <div id="contact-success" class="form-success hidden" style="margin-top:1rem">
-          <p>✅ Message sent! We will reply within 2 working days.</p>
+          <p><i class="fas fa-check-circle"></i> Message sent! We will reply within 2 working days.</p>
         </div>
       </form>
     </div>
   </section>
 
-  <!-- FOOTER: shared footer links and contact summary -->
+  <!-- FOOTER -->
   <footer id="main-footer">
     <div class="footer-inner">
       <div class="footer-col">
-        <!-- sch: footer branding updated -->
         <div class="footer-logo">✦ Amus College School</div>
         <p>Let there be light<br />Bukedea District, Eastern Uganda</p>
       </div>
@@ -299,26 +481,133 @@
       </div>
       <div class="footer-col">
         <h5>Contact</h5>
-        <!-- sch: contact email updated -->
-        <address>P.O. Box 2058<br />📞 +256 414 000 000<br />✉ info@amuscollegeschool.ac.ug</address>
+        <address>
+          P.O. Box 2058<br />
+          <i class="fas fa-phone-alt"></i> +256 414 000 000<br />
+          <i class="fas fa-envelope"></i> info@amuscollegeschool.ac.ug
+        </address>
       </div>
       <div class="footer-col">
         <h5>Follow Us</h5>
         <div class="social-links">
-          <a href="#" class="social-btn">Facebook</a>
-          <a href="#" class="social-btn">Twitter</a>
-          <a href="#" class="social-btn">YouTube</a>
+          <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="#" class="social-btn"><i class="fab fa-twitter"></i> Twitter</a>
+          <a href="#" class="social-btn"><i class="fab fa-youtube"></i> YouTube</a>
         </div>
       </div>
     </div>
-    <!-- sch: copyright name updated -->
     <div class="footer-bottom"><p>&copy; 2026 Amus College School. All rights reserved.</p></div>
   </footer>
 
-  <!-- sch: floating enrol CTA separate from navbar -->
+  <!-- FLOATING CTA -->
   <a href="contact.html#registration" class="floating-enrol-btn">Enrol Now</a>
 
-  <script src="main.js"></script>
+  <script>
+    (function() {
+      // Brand injection
+      const brand = { name: 'Amus College School', tagline: 'Let there be light' };
+      document.querySelectorAll('.logo-name').forEach(el => el.textContent = brand.name);
+      document.querySelectorAll('.logo-tag').forEach(el => el.textContent = brand.tagline);
+      const footerLogo = document.querySelector('.footer-logo');
+      if (footerLogo) footerLogo.innerHTML = `✦ ${brand.name}`;
+      
+      // Page title
+      const pageTitle = document.body.getAttribute('data-page-title');
+      if (pageTitle) document.title = `${brand.name} – ${pageTitle}`;
+
+      // Header scroll shadow
+      const header = document.getElementById('main-header');
+      if (header) {
+        window.addEventListener('scroll', () => {
+          header.style.boxShadow = window.scrollY > 30 ? '0 4px 24px rgba(0,0,0,0.4)' : '';
+        });
+      }
+
+      // Hamburger menu
+      const hamburger = document.getElementById('hamburger');
+      const mainNav = document.getElementById('main-nav');
+      if (hamburger && mainNav) {
+        hamburger.addEventListener('click', () => {
+          const isOpen = mainNav.classList.toggle('open');
+          hamburger.setAttribute('aria-expanded', isOpen);
+          const spans = hamburger.querySelectorAll('span');
+          if (isOpen) {
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+          } else {
+            spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+          }
+        });
+        mainNav.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', () => {
+            mainNav.classList.remove('open');
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+          });
+        });
+      }
+
+      // Simple form validation (demo)
+      const regForm = document.getElementById('registration-form');
+      const contactForm = document.getElementById('contact-form');
+      const formSuccess = document.getElementById('form-success');
+      const contactSuccess = document.getElementById('contact-success');
+      const resetBtn = document.getElementById('form-reset-btn');
+
+      if (regForm) {
+        regForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          let isValid = true;
+          const required = ['first-name', 'last-name', 'dob', 'gender', 'grade', 'parent-name', 'relationship', 'phone-number', 'email', 'agree'];
+          required.forEach(id => {
+            const field = document.getElementById(id);
+            if (field && !field.value) {
+              isValid = false;
+              const errSpan = document.getElementById(`err-${id}`);
+              if (errSpan) errSpan.textContent = 'This field is required';
+            } else {
+              const errSpan = document.getElementById(`err-${id}`);
+              if (errSpan) errSpan.textContent = '';
+            }
+          });
+          if (isValid) {
+            regForm.classList.add('hidden');
+            formSuccess.classList.remove('hidden');
+          }
+        });
+        if (resetBtn) {
+          resetBtn.addEventListener('click', () => {
+            regForm.classList.remove('hidden');
+            formSuccess.classList.add('hidden');
+            regForm.reset();
+          });
+        }
+      }
+
+      if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          let isValid = true;
+          ['c-name', 'c-email', 'c-subject', 'c-message'].forEach(id => {
+            const field = document.getElementById(id);
+            if (field && !field.value) {
+              isValid = false;
+              const errSpan = document.getElementById(`err-${id}`);
+              if (errSpan) errSpan.textContent = 'This field is required';
+            } else {
+              const errSpan = document.getElementById(`err-${id}`);
+              if (errSpan) errSpan.textContent = '';
+            }
+          });
+          if (isValid) {
+            contactForm.reset();
+            contactSuccess.classList.remove('hidden');
+            setTimeout(() => contactSuccess.classList.add('hidden'), 5000);
+          }
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
-

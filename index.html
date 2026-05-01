@@ -3,10 +3,102 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- sch: changed site identity to primary school -->
-  <title>Amus College School</title>
+  <title>Amus College School – Home</title>
+  <!-- Google Fonts (matching main site) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
-  <!-- sch: removed external Google Fonts link for local-only setup -->
+  <style>
+    /* Additional inline styles for consistency (no changes to hamburger code) */
+    .logo-block > div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.2;
+    }
+    .logo-name {
+      margin-bottom: 0.1rem;
+    }
+    .logo-tag {
+      font-size: 0.65rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+    .card-icon, .val-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+      color: var(--gold);
+    }
+    .card-icon i, .val-icon i {
+      color: var(--gold);
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--navy);
+    }
+    .stat-unit {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .hero-sub {
+      font-size: 0.85rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .social-btn i {
+      margin-right: 0.4rem;
+    }
+    .testi-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 0 auto;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .testi-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    .testi-author strong {
+      display: block;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .testi-author span {
+      color: var(--text-light);
+      font-size: 0.85rem;
+    }
+    .testi-controls button {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      background: transparent;
+      color: var(--gold);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .testi-controls button:hover {
+      background: var(--gold);
+      color: var(--navy);
+    }
+  </style>
 </head>
 <body data-page-title="Home">
 
@@ -22,11 +114,11 @@
       </div>
       <nav id="main-nav">
         <ul>
-      <li><a href="index.html" class="nav-link active">Home</a></li>
-      <li><a href="about.html" class="nav-link">About</a></li>
-      <li><a href="academics.html" class="nav-link">Academics</a></li>
-      <li><a href="gallery.html" class="nav-link">Gallery</a></li>
-      <li><a href="contact.html" class="nav-link">Contact</a></li>
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="academics.html" class="nav-link">Academics</a></li>
+          <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -40,28 +132,26 @@
       <span></span><span></span><span></span>
     </button>
   </div>
-  <!-- HERO SLIDESHOW: background slides auto-rotate and can be changed via dots -->
+
+  <!-- HERO SLIDESHOW -->
   <section id="hero">
-    <!-- sch: switched hero slides to local images -->
     <div class="slide active" style="background-image: url('images/sd_63274e34be51c.jpg')"></div>
     <div class="slide" style="background-image: url('images/sd_6327511ab705b.jpg')"></div>
     <div class="slide" style="background-image: url('images/sd_63275063d49a7.jpg')"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <!-- sch: updated hero copy for primary school -->
       <p class="hero-sub">LET THERE BE LIGHT</p>
       <h1 class="hero-title">Amus College School</h1>
       <p class="hero-desc">Amus College School is the best school to nurture your child academically, spiritually, morally and talent.</p>
       <div class="hero-btns">
         <a href="about.html" class="btn btn-primary">Discover More</a>
-        <!-- sch: send users straight to form section -->
         <a href="contact.html#registration" class="btn btn-outline">Apply Now</a>
       </div>
     </div>
-    <div class="slide-dots" id="slide-dots"></div><!-- Dots are generated by JS based on slide count -->
+    <div class="slide-dots" id="slide-dots"></div>
   </section>
 
-  <!-- STATS STRIP: numbers animate from 0 when section enters viewport -->
+  <!-- STATS STRIP -->
   <section id="stats-strip">
     <div class="stats-inner">
       <div class="stat-item">
@@ -73,53 +163,48 @@
         <p>Senior One to Senior Six</p>
       </div>
       <div class="stat-item">
-        <!-- sch: changed secondary outcome to primary completion -->
         <span class="stat-num" data-target="1">0</span><span class="stat-unit">km</span>
         <p>Off Mbale-Soroti Highway</p>
       </div>
     </div>
   </section>
 
-  <!-- WELCOME SECTION: quick school intro + CTA -->
+  <!-- WELCOME SECTION -->
   <section id="welcome">
     <div class="container two-col">
       <div class="welcome-text">
-      <!-- sch: replaced welcome section copy with primary-school messaging -->
-      <span class="section-label">About</span>
-      <h2>Amus College School</h2>
-      <p>Amus College School is located in Bukedea District, Eastern Uganda. One kilometer off Mbale-Soroti highway. On Amus Sapir Hill.</p>
-      <p>Admission for all classes from Senior one to Senior six is on going. Please call now for more information. Po box number 2058.</p>
+        <span class="section-label">About</span>
+        <h2>Amus College School</h2>
+        <p>Amus College School is located in Bukedea District, Eastern Uganda. One kilometer off Mbale-Soroti highway. On Amus Sapir Hill.</p>
+        <p>Admission for all classes from Senior one to Senior six is on going. Please call now for more information. Po box number 2058.</p>
         <a href="about.html" class="btn btn-primary">Learn About Us</a>
       </div>
       <div class="welcome-img-wrap">
-        <!-- sch: updated alt text -->
-        <!-- sch: switched welcome image to local asset -->
         <img src="images/sd_63274c30bddf9.jpg" alt="Main block" class="welcome-img" />
       </div>
     </div>
   </section>
 
-  <!-- PROGRAMS HIGHLIGHT: preview cards that link to Academics page -->
+  <!-- PROGRAMS HIGHLIGHT (emojis replaced with Font Awesome icons) -->
   <section id="programs-highlight">
     <div class="container">
       <span class="section-label">Academics</span>
-      <!-- sch: changed programme framing to primary levels -->
       <h2>Senior One to Senior Six</h2>
       <div class="program-cards">
         <article class="program-card">
-          <div class="card-icon">📚</div>
+          <div class="card-icon"><i class="fas fa-book"></i></div>
           <h3>Senior One</h3>
           <p>Admission is ongoing for Senior one.</p>
           <a href="academics.html" class="card-link">Explore →</a>
         </article>
         <article class="program-card featured-card">
-          <div class="card-icon">🎓</div>
+          <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
           <h3>Senior Two to Senior Four</h3>
           <p>Admission is ongoing for Senior two to Senior four.</p>
           <a href="academics.html" class="card-link">Explore →</a>
         </article>
         <article class="program-card">
-          <div class="card-icon">⚽</div>
+          <div class="card-icon"><i class="fas fa-futbol"></i></div>
           <h3>Senior Five to Senior Six</h3>
           <p>Admission is ongoing for Senior five to Senior six.</p>
           <a href="academics.html" class="card-link">Explore →</a>
@@ -128,25 +213,24 @@
     </div>
   </section>
 
-  <!-- NEWS / ANNOUNCEMENTS: latest school updates -->
+  <!-- NEWS / ANNOUNCEMENTS -->
   <section id="news">
     <div class="container">
       <span class="section-label">Updates</span>
       <h2>Notices</h2>
       <div class="news-grid">
         <article class="news-card">
-          <div class="news-date">Admissions</div>
+          <div class="news-date"><i class="fas fa-calendar-alt"></i> Admissions</div>
           <h4>Admissions Ongoing (S1-S6)</h4>
           <p>Admission for all classes from Senior one to Senior six is on going. Please call now for more information.</p>
         </article>
         <article class="news-card">
-          <div class="news-date">Location</div>
-          <!-- sch: replaced secondary class reference -->
+          <div class="news-date"><i class="fas fa-map-marker-alt"></i> Location</div>
           <h4>Where to Find Us</h4>
           <p>Bukedea District, Eastern Uganda. One kilometer off Mbale-Soroti highway on Amus Sapir Hill.</p>
         </article>
         <article class="news-card">
-          <div class="news-date">Goals</div>
+          <div class="news-date"><i class="fas fa-bullseye"></i> Goals</div>
           <h4>Goals of the College</h4>
           <p>The college is universal institution interested in providing a bright future in both education and talent of the community.</p>
         </article>
@@ -154,7 +238,7 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS: one card visible at a time (manual + auto slider) -->
+  <!-- TESTIMONIALS / HIGHLIGHTS SECTION -->
   <section id="testimonials">
     <div class="container">
       <span class="section-label">Highlights</span>
@@ -183,19 +267,18 @@
         </div>
       </div>
       <div class="testi-controls">
-        <button id="testi-prev" aria-label="Previous">&#8592;</button>
-        <button id="testi-next" aria-label="Next">&#8594;</button>
+        <button id="testi-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+        <button id="testi-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER: shared site-wide links and contact details -->
+  <!-- FOOTER (balanced with Font Awesome icons) -->
   <footer id="main-footer">
     <div class="footer-inner">
       <div class="footer-col">
-        <!-- sch: footer branding updated -->
         <div class="footer-logo">✦ Amus College School</div>
-        <p><br /></p>
+        <p>Let there be light<br />Bukedea District, Eastern Uganda</p>
       </div>
       <div class="footer-col">
         <h5>Quick Links</h5>
@@ -208,33 +291,30 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h5></h5>
+        <h5>Contact</h5>
         <address>
-          <br />
-          <br />
-          <!-- sch: contact email updated -->
-          
+          P.O. Box 2058<br />
+          <i class="fas fa-phone-alt"></i> +256 414 000 000<br />
+          <i class="fas fa-envelope"></i> info@amuscollegeschool.ac.ug
         </address>
       </div>
       <div class="footer-col">
         <h5>Follow Us</h5>
         <div class="social-links">
-          <a href="#" class="social-btn">Facebook</a>
-          <a href="#" class="social-btn">Twitter</a>
-          <a href="#" class="social-btn">YouTube</a>
+          <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="#" class="social-btn"><i class="fab fa-twitter"></i> Twitter</a>
+          <a href="#" class="social-btn"><i class="fab fa-youtube"></i> YouTube</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <!-- sch: copyright name updated -->
-      <p>&copy; 2026 Amus College School.</p>
+      <p>&copy; 2026 Amus College School. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- sch: floating enrol CTA separate from navbar -->
+  <!-- FLOATING CTA -->
   <a href="contact.html#registration" class="floating-enrol-btn">Enrol Now</a>
 
   <script src="main.js"></script>
 </body>
 </html>
-
