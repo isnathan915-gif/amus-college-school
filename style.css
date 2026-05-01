@@ -254,8 +254,8 @@ body > section:first-of-type:not(#hero), .page-banner { margin-top: var(--header
 }
 
 @media (max-width: 768px) {
-  #main-header { display: none; }
-  .hamburger { display: flex; background: var(--navy); border: 1px solid var(--gold); position: fixed; right: 1rem; top: 1rem; z-index: 9999; }
+  #main-header { background: var(--navy); }
+  .hamburger { display: flex; background: var(--navy); border: 2px solid var(--gold); position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); z-index: 1001; }
   .logo-tag { display: none; }
   .header-inner { padding: 0 1rem; }
   .logo-block { max-width: calc(100% - 60px); }
